@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+    <channel>
+        <title>Quarkus</title>
+        <link>https://quarkus.io</link>
+        <description>Quarkus: Supersonic Subatomic Java</description>
+        <lastBuildDate>Fri, 02 Oct 2020 09:06:52 +0000</lastBuildDate>
+        
+        <item>
+            <title>Biased locking removed from Java - does it affect you ?</title>
+            <link>
+                https://quarkus.io/blog/biased-locking-help/
+            </link>
+            <description>
+                Last week we became aware that the OpenJDK team in Java 15 have disabled biased locking (JEP 374) in the Java virtual machine. This is a change from previous versions and could potentially have a negative impact on Java application&#8217;s performance. Red Hat&#8217;s own performance teams are currently running performance...
+            </description>
+            <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+            <guid>
+                https://quarkus.io/blog/biased-locking-help/
+            </guid>
+        </item>
+
+    </channel>
+</rss>
