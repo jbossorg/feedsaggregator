@@ -6,4 +6,8 @@
     <ref id="feedReader" class="org.jboss.planet.feeds2mongo.batch.FeedReader"/>
     <ref id="postsProcessor" class="org.jboss.planet.feeds2mongo.batch.PostsProcessor"/>
     <ref id="mongoWriter" class="org.jboss.planet.feeds2mongo.batch.MongoWriter"/>
+
+    <ref id="allFeedsConfigReader" class="org.jboss.planet.feeds2mongo.batch.AllFeedsConfigReader"/>
+    <ref id="allFeedsWriter" class="org.jboss.planet.feeds2mongo.batch.AllFeedsWriter"/>
+
 </batch-artifacts>

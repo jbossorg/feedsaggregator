@@ -1,0 +1,4 @@
+- code: test1
+  url: https://raw.githubusercontent.com/lkrzyzanek/feeds2mongo/main/src/test/resources/test-feed.xml
+- code: test2
+  url: https://raw.githubusercontent.com/lkrzyzanek/feeds2mongo/main/src/test/resources/test-feed2.xml

@@ -16,6 +16,6 @@ mvn clean package -Puberjar
 
 ```
 mvn clean package -Puberjar
-java -jar target/feeds2mongo.jar process-feed.xml url=https://quarkus.io/feed.xml
+java -jar target/feeds2mongo.jar process-feed.xml url=https://quarkus.io/feed.xml feedCode=quarkus
 ```
 

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<job id="process-feed" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<job id="process-all-feeds" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd"
      version="1.0">
-    <step id="processPosts">
+    <step id="processAllFeeds">
         <chunk>
-            <reader ref="feedReader"/>
-            <processor ref="postsProcessor"/>
-            <writer ref="mongoWriter"/>
+            <reader ref="allFeedsConfigReader"/>
+            <writer ref="allFeedsWriter"/>
         </chunk>
     </step>
 </job>
