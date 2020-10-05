@@ -1,13 +1,11 @@
 package org.jboss.planet.feeds2mongo.batch;
 
-import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
 import javax.batch.runtime.BatchStatus;
-import javax.batch.runtime.JobInstance;
 
 import org.bson.Document;
 import org.jberet.runtime.JobExecutionImpl;
@@ -26,28 +24,19 @@ public class ProcessAllFeedsTest extends MongoBaseTest {
 
     protected String configPath = null;
 
-    protected String getConfigPath() throws Exception {
+    protected String getConfigUrl() throws Exception {
         return ProcessFeedTest.getAbsoluteTestFilePath("/test-feed-config.yaml");
     }
 
     @Test
     public void processTestFeedTest() throws Exception {
         Properties prop = getMongoWriterProperties();
-        prop.setProperty("configPath", getConfigPath());
+        prop.setProperty("configUrl", getConfigUrl());
 
         final long jobExecutionId = jobOperator.start(jobName, prop);
         final JobExecutionImpl jobExecution = (JobExecutionImpl) jobOperator.getJobExecution(jobExecutionId);
         jobExecution.awaitTermination(1, TimeUnit.MINUTES);
         Assert.assertEquals(BatchStatus.COMPLETED, jobExecution.getBatchStatus());
-
-        // Wait on all executions
-        List<JobInstance> jobInstances = jobOperator.getJobInstances("process-feed", 0, Integer.MAX_VALUE);
-        for (JobInstance instance : jobInstances) {
-            final JobExecutionImpl exec = (JobExecutionImpl) jobOperator.getJobExecution(instance.getInstanceId());
-
-            exec.awaitTermination(5, TimeUnit.MINUTES);
-            Assert.assertEquals(BatchStatus.COMPLETED, exec.getBatchStatus());
-        }
 
         testDB();
     }

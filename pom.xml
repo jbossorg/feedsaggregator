@@ -113,7 +113,7 @@
             <groupId>org.jberet</groupId>
             <artifactId>jberet-core</artifactId>
             <version>${version.org.jberet}</version>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.jberet</groupId>

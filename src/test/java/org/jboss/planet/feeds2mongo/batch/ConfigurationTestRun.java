@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 public class ConfigurationTestRun extends ProcessAllFeedsTest {
 
     @Override
-    protected String getConfigPath() throws Exception {
+    protected String getConfigUrl() throws Exception {
         String cPath = System.getProperty("configUrl");
         if (StringUtils.isBlank(cPath)) {
             throw new Exception("Variable `configUrl` not configured");
