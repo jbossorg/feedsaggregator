@@ -54,7 +54,11 @@ public class FeedReader implements ItemReader {
         feedCode = jobProperties.getProperty("code");
 
         SyndFeedInput input = new SyndFeedInput();
-        reader = new XmlReader(new URL(feedUrl));
+        if (feedUrl.startsWith("/")) {
+            reader = new XmlReader(FeedReader.class.getResourceAsStream(feedUrl));
+        } else {
+            reader = new XmlReader(new URL(feedUrl));
+        }
         feed = input.build(reader);
         entries = feed.getEntries();
 
