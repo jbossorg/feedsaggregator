@@ -65,7 +65,7 @@ public class MongoWriter implements ItemWriter {
         for (Object item : items) {
             Document doc = (Document) item;
             Object postUrl = doc.get("url");
-            log.infof("Storing blog post: %s", postUrl);
+            log.infof("[%s] Storing blog post: %s", Thread.currentThread().getName(), postUrl);
             log.tracef("Blog data: %s", doc);
 
             collection.findOneAndReplace(Filters.eq("url", postUrl), doc, replaceOptions);

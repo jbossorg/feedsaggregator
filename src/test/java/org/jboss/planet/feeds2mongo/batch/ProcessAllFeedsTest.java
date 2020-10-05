@@ -22,8 +22,6 @@ public class ProcessAllFeedsTest extends MongoBaseTest {
     private static final String jobName = "process-all-feeds.xml";
     private static final JobOperator jobOperator = BatchRuntime.getJobOperator();
 
-    protected String configPath = null;
-
     protected String getConfigUrl() throws Exception {
         return ProcessFeedTest.getAbsoluteTestFilePath("/test-feed-config.yaml");
     }
