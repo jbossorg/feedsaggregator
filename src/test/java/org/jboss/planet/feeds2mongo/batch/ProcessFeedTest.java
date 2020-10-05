@@ -11,29 +11,41 @@ import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
 import javax.batch.runtime.BatchStatus;
 
+import org.bson.Document;
 import org.jberet.runtime.JobExecutionImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+
 /**
- * Tests of feed-check.xml
+ * Tests of process-feed.xml
  */
-public class FeedCheckTest {
-    private static final String jobName = "feed-check.xml";
+public class ProcessFeedTest extends MongoBaseTest {
+    private static final String jobName = "process-feed.xml";
     private static final JobOperator jobOperator = BatchRuntime.getJobOperator();
 
     @Test
-    public void feedCheckToConsole() throws Exception {
-        Properties prop = new Properties();
+    public void processTestFeedTest() throws Exception {
+        Properties prop = getMongoWriterProperties();
         prop.setProperty("url", getAbsoluteTestFilePath("/test-feed.xml"));
+        prop.setProperty("feed", "test-feed");
+
         final long jobExecutionId = jobOperator.start(jobName, prop);
         final JobExecutionImpl jobExecution = (JobExecutionImpl) jobOperator.getJobExecution(jobExecutionId);
         jobExecution.awaitTermination(5, TimeUnit.MINUTES);
         Assert.assertEquals(BatchStatus.COMPLETED, jobExecution.getBatchStatus());
+
+        MongoCollection<Document> collection = getCollection();
+        Assert.assertEquals(1, collection.countDocuments());
+
+        Document post = collection.find(Filters.eq("url", "https://example.com/blog/post1/")).first();
+        Assert.assertEquals("test-title", post.get("title"));
     }
 
     public static String getAbsoluteTestFilePath(String name) throws URISyntaxException {
-        URL res = FeedCheckTest.class.getResource(name);
+        URL res = ProcessFeedTest.class.getResource(name);
         File file = Paths.get(res.toURI()).toFile();
         return "file://" + file.getAbsolutePath();
     }

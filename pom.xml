@@ -24,6 +24,8 @@
         <main.class>org.jberet.se.Main</main.class>
         <version.org.jberet>1.4.0.Final</version.org.jberet>
         <version.com.rometools>1.15.0</version.com.rometools>
+        <version.mongodb.driver>3.12.7</version.mongodb.driver>
+
     </properties>
 
     <dependencyManagement>
@@ -39,12 +41,33 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.10</version>
+        </dependency>
         <!-- ROME tool-->
         <dependency>
             <groupId>com.rometools</groupId>
             <artifactId>rome</artifactId>
             <version>${version.com.rometools}</version>
         </dependency>
+
+        <!-- Compatibility: https://docs.mongodb.com/ecosystem/drivers/driver-compatibility-reference/#java-driver-compatibility -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${version.mongodb.driver}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
+        <dependency>
+            <groupId>de.flapdoodle.embed</groupId>
+            <artifactId>de.flapdoodle.embed.mongo</artifactId>
+            <version>2.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+
         <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
@@ -168,6 +191,11 @@
                 <configuration>
                     <release>11</release>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
             </plugin>
 
             <plugin>

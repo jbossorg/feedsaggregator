@@ -10,12 +10,12 @@ Run maven command to create uberjar
 mvn clean package -Puberjar
 ```
 
-## How to run `feed-check` job
+## How to run `process-feed` job
 
 ### Locally
 
 ```
 mvn clean package -Puberjar
-java -jar target/feeds2mongo.jar feed-check.xml url=https://quarkus.io/feed.xml
+java -jar target/feeds2mongo.jar process-feed.xml url=https://quarkus.io/feed.xml
 ```
 

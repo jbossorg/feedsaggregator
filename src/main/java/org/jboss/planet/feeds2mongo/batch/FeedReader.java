@@ -40,9 +40,9 @@ public class FeedReader implements ItemReader {
 
     protected int rowNumber;
 
+    @Override
     public void open(final Serializable checkpoint) throws Exception {
-        SyndFeedInput input = new SyndFeedInput();
-        Properties jobProperties = getJobParameter();
+        Properties jobProperties = getJobParameter(jobContext);
 
         log.infof("Opening job with job properties %s", jobProperties);
 
@@ -53,6 +53,7 @@ public class FeedReader implements ItemReader {
 
         feedCode = jobProperties.getProperty("code");
 
+        SyndFeedInput input = new SyndFeedInput();
         reader = new XmlReader(new URL(feedUrl));
         feed = input.build(reader);
         entries = feed.getEntries();
@@ -64,12 +65,13 @@ public class FeedReader implements ItemReader {
         }
     }
 
-    public Properties getJobParameter() {
+    public static Properties getJobParameter(JobContext jobContext) {
         long executionId = jobContext.getExecutionId();
         JobExecution jobExecution = BatchRuntime.getJobOperator().getJobExecution(executionId);
         return jobExecution.getJobParameters();
     }
 
+    @Override
     public Object readItem() {
         if (rowNumber >= entries.size()) {
             return null;
@@ -77,10 +79,12 @@ public class FeedReader implements ItemReader {
         return entries.get(rowNumber++);
     }
 
+    @Override
     public Serializable checkpointInfo() {
         return rowNumber;
     }
 
+    @Override
     public void close() throws Exception {
         reader.close();
     }
