@@ -56,7 +56,8 @@ mvn clean package -Puberjar
 ```
 java -jar target/feeds2mongo.jar process-feed.xml \
      url=https://quarkus.io/feed.xml \
-     feed=quarkus mongoUrl=mongodb://localhost:27017 \
+     feed=quarkus \
+     mongoUrl=mongodb://localhost:27017 \
      db=feeds2mongo \
      collection=post
 ```
