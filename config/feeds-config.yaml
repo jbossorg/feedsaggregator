@@ -1,2 +1,4 @@
 - code: quarkus
   url: https://quarkus.io/feed.xml
+- code: developers
+  url: https://developers.redhat.com/blog/feed/atom/

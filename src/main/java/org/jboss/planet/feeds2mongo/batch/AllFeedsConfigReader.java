@@ -71,7 +71,7 @@ public class AllFeedsConfigReader implements ItemReader {
         for (JobInstance instance : jobInstances) {
             final JobExecutionImpl exec = (JobExecutionImpl) jobOperator.getJobExecution(instance.getInstanceId());
 
-            log.infof("Waiting for job completion jobInstance=$s timeout=%s", instance.getInstanceId(), timeout);
+            log.infof("Waiting for job completion jobInstance=%s timeout=%s", instance.getInstanceId(), timeout);
             exec.awaitTermination(timeout, TimeUnit.MINUTES);
         }
     }
