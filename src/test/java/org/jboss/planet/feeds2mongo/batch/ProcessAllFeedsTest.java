@@ -24,10 +24,16 @@ public class ProcessAllFeedsTest extends MongoBaseTest {
     private static final String jobName = "process-all-feeds.xml";
     private static final JobOperator jobOperator = BatchRuntime.getJobOperator();
 
+    protected String configPath = null;
+
+    protected String getConfigPath() throws Exception {
+        return ProcessFeedTest.getAbsoluteTestFilePath("/test-feed-config.yaml");
+    }
+
     @Test
     public void processTestFeedTest() throws Exception {
         Properties prop = getMongoWriterProperties();
-        prop.setProperty("configPath", ProcessFeedTest.getAbsoluteTestFilePath("/test-feed-config.yaml"));
+        prop.setProperty("configPath", getConfigPath());
 
         final long jobExecutionId = jobOperator.start(jobName, prop);
         final JobExecutionImpl jobExecution = (JobExecutionImpl) jobOperator.getJobExecution(jobExecutionId);
@@ -43,7 +49,10 @@ public class ProcessAllFeedsTest extends MongoBaseTest {
             Assert.assertEquals(BatchStatus.COMPLETED, exec.getBatchStatus());
         }
 
+        testDB();
+    }
 
+    protected void testDB() {
         MongoCollection<Document> collection = getCollection();
         Assert.assertEquals(2, collection.countDocuments());
 

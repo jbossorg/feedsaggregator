@@ -30,7 +30,7 @@ public class AllFeedsConfigReader implements ItemReader {
     public void open(Serializable checkpoint) throws Exception {
         Properties jobProperties = FeedReader.getJobParameter(jobContext);
 
-        log.infof("Opening job with job properties %s", jobProperties);
+        log.infof("Opening job `AllFeedsConfigReader` with job properties %s", jobProperties);
 
         String configPath = jobProperties.getProperty("configPath");
         if (configPath == null) {

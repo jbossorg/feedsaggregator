@@ -2,6 +2,7 @@ package org.jboss.planet.feeds2mongo.batch;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
 
 import org.bson.Document;
 import org.jboss.logging.Logger;
@@ -48,11 +49,14 @@ public class MongoBaseTest {
 
     @BeforeClass
     public static void oneTimeSetUp() {
+        final java.util.logging.Logger mongoLogger = java.util.logging.Logger.getLogger(MongoBaseTest.class.getName());
+        mongoLogger.setLevel(Level.WARNING);
+
         Version.Main version = Version.Main.V3_6;
         log.infof("Starting Mongo %s on port %s", version, port);
         try {
             IMongodConfig config = new MongodConfigBuilder().version(version).net(new Net(port, Network.localhostIsIPv6())).build();
-            IRuntimeConfig runtimeConfig = new RuntimeConfigBuilder().defaultsWithLogger(Command.MongoD, java.util.logging.Logger.getLogger(MongoBaseTest.class.getName())).build();
+            IRuntimeConfig runtimeConfig = new RuntimeConfigBuilder().defaultsWithLogger(Command.MongoD, mongoLogger).build();
 
             MONGO = MongodStarter.getInstance(runtimeConfig).prepare(config);
             MongodProcess mongodProcess = MONGO.start();
