@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+    <channel>
+        <title>test-feed2</title>
+        <link>https://example.com</link>
+        <description>feed test description 2</description>
+        
+        <item>
+            <title>test-title2</title>
+            <link>
+                https://example.com/blog2/post1/
+            </link>
+            <description>
+                blog post description 2
+            </description>
+            <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+            <guid>
+                https://example.com/blog2/post1/
+            </guid>
+        </item>
+
+    </channel>
+</rss>
