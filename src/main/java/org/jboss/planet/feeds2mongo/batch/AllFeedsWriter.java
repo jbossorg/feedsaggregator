@@ -68,7 +68,7 @@ public class AllFeedsWriter implements ItemWriter {
         for (long instanceId : executions) {
             final JobExecutionImpl exec = (JobExecutionImpl) jobOperator.getJobExecution(instanceId);
 
-            log.infof("Waiting for job completion jobInstance=%s timeout=%smin", instanceId, timeout);
+            log.debugf("Waiting for job completion jobInstance=%s timeout=%smin", instanceId, timeout);
             exec.awaitTermination(timeout, TimeUnit.MINUTES);
 
             int count = Integer.parseInt(exec.getExitStatus());

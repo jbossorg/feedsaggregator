@@ -58,8 +58,12 @@ public class FeedReader implements ItemReader {
         } else {
             reader = new XmlReader(getConnection(feedUrl).getInputStream());
         }
-        feed = input.build(reader);
-        entries = feed.getEntries();
+        try {
+            feed = input.build(reader);
+            entries = feed.getEntries();
+        } catch(Exception e) {
+            throw new BatchRuntimeException("Cannot parse feed. feedUrl=" + feedUrl, e);
+        }
 
         if (checkpoint != null) {
             rowNumber = (Integer) checkpoint;

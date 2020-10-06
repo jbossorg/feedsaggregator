@@ -17,10 +17,13 @@
         <listener ref="loggingJobListener"/>
     </listeners>
     <step id="processFeed">
-        <chunk>
+        <chunk retry-limit="3">
             <reader ref="feedReader"/>
             <processor ref="feedPostProcessor"/>
             <writer ref="feedMongoWriter"/>
+            <skippable-exception-classes>
+                <include class="org.jboss.planet.feeds2mongo.batch.PostValidationException"/>
+            </skippable-exception-classes>
             <retryable-exception-classes>
                 <include class="java.net.SocketTimeoutException"/>
             </retryable-exception-classes>

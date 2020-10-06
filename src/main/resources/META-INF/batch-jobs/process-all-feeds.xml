@@ -19,7 +19,7 @@
         </listener>
     </listeners>
     <step id="processAllFeeds">
-        <chunk>
+        <chunk item-count="20">
             <reader ref="allFeedsConfigReader"/>
             <writer ref="allFeedsWriter"/>
         </chunk>
