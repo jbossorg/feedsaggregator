@@ -13,6 +13,9 @@
             5. `db` - DB Name
             6. `collection` - Collection name
     -->
+    <listeners>
+        <listener ref="loggingJobListener"/>
+    </listeners>
     <step id="processFeed">
         <chunk>
             <reader ref="feedReader"/>

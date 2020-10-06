@@ -26,8 +26,6 @@ public class FeedMongoWriter implements ItemWriter {
     private String dbName;
     private String collectionName;
 
-    MongoClientProvider mongoClientProvider;
-
     private static MongoCollection<Document> collection = null;
 
     private Object feed;
@@ -51,13 +49,12 @@ public class FeedMongoWriter implements ItemWriter {
         if (collectionName == null) {
             throw new BatchRuntimeException("job parameter `collection` must be defined");
         }
-        collection = mongoClientProvider.getClient(mongoUrl).getDatabase(dbName).getCollection(collectionName);
+        collection = MongoClientProvider.getClient(mongoUrl).getDatabase(dbName).getCollection(collectionName);
         count = 0;
     }
 
     @Override
     public void close() throws Exception {
-        log.infof("[%s] JOB_PROCESS status=COMPLETED feed=%s count=%s", Thread.currentThread().getName(),  feed, count);
         jobContext.setExitStatus("" + count);
     }
 

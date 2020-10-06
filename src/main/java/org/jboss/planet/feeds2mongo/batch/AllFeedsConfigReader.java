@@ -3,14 +3,16 @@ package org.jboss.planet.feeds2mongo.batch;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import javax.batch.api.chunk.ItemReader;
 import javax.batch.operations.BatchRuntimeException;
 import javax.batch.runtime.context.JobContext;
 import javax.inject.Inject;
 
-import org.jboss.logging.Logger;
 import org.jboss.planet.feeds2mongo.batch.model.FeedConfig;
 import org.yaml.snakeyaml.Yaml;
 
@@ -19,16 +21,12 @@ import org.yaml.snakeyaml.Yaml;
  */
 public class AllFeedsConfigReader implements ItemReader {
 
-    private Logger log = Logger.getLogger(AllFeedsConfigReader.class);
-
     @Inject
     JobContext jobContext;
 
     List<FeedConfig> feeds;
 
     private int index;
-
-    private long started, finished;
 
     public static List<FeedConfig> getConfig(InputStream is) {
         Yaml config = new Yaml();
@@ -47,11 +45,7 @@ public class AllFeedsConfigReader implements ItemReader {
 
     @Override
     public void open(Serializable checkpoint) throws Exception {
-        started = System.currentTimeMillis();
-        log.infof("JOB_PROCESS_ALL status=STARTED timestamp='%s'", new Date(started));
-
         Properties jobProperties = FeedReader.getJobParameter(jobContext);
-        log.debugf("Opening job 'AllFeedsConfigReader'. allfeedsconfig=%s", jobProperties);
 
         String configUrl = jobProperties.getProperty("configUrl");
         if (configUrl == null) {
@@ -79,9 +73,6 @@ public class AllFeedsConfigReader implements ItemReader {
 
     @Override
     public void close() throws Exception {
-        finished = System.currentTimeMillis();
-        long durationSec = (finished - started) / 1000;
-        log.infof("JOB_PROCESS_ALL status=COMPLETED timestamp='%s' durationSec=%s postsCount=%s", new Date(finished), durationSec, jobContext.getExitStatus());
     }
 
     @Override

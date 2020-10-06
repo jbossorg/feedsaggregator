@@ -11,6 +11,13 @@
             3. `db` - DB Name
             4. `collection` - Collection name
     -->
+    <listeners>
+        <listener ref="loggingJobListener">
+            <properties>
+                <property name="logProperties" value="false"/>
+            </properties>
+        </listener>
+    </listeners>
     <step id="processAllFeeds">
         <chunk>
             <reader ref="allFeedsConfigReader"/>

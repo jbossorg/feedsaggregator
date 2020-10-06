@@ -12,8 +12,6 @@ import javax.batch.runtime.JobExecution;
 import javax.batch.runtime.context.JobContext;
 import javax.inject.Inject;
 
-import org.jboss.logging.Logger;
-
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
@@ -23,8 +21,6 @@ import com.rometools.rome.io.XmlReader;
  * Read the feed from url and pass individual feed posts
  */
 public class FeedReader implements ItemReader {
-
-    private Logger log = Logger.getLogger(FeedReader.class);
 
     @Inject
     JobContext jobContext;
@@ -66,8 +62,6 @@ public class FeedReader implements ItemReader {
         } else {
             rowNumber = 0;
         }
-
-        log.infof("[%s] JOB_PROCESS status=STARTED feed=%s url=%s", Thread.currentThread().getName(), feedCode, feedUrl);
     }
 
     public static Properties getJobParameter(JobContext jobContext) {
