@@ -12,7 +12,7 @@
 #     url: feedurl4
 
 - aerogear:
-    - code: aeroGear
+    - code: aerogear
       url: http://corinnekrych.blogspot.com/feeds/posts/default?alt=rss
 - quarkus:
     - code: quarkus
