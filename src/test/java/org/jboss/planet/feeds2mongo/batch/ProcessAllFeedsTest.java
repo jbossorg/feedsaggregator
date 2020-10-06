@@ -33,7 +33,7 @@ public class ProcessAllFeedsTest extends MongoBaseTest {
 
         final long jobExecutionId = jobOperator.start(jobName, prop);
         final JobExecutionImpl jobExecution = (JobExecutionImpl) jobOperator.getJobExecution(jobExecutionId);
-        jobExecution.awaitTermination(1, TimeUnit.MINUTES);
+        jobExecution.awaitTermination(10, TimeUnit.MINUTES);
         Assert.assertEquals(BatchStatus.COMPLETED, jobExecution.getBatchStatus());
 
         testDB();

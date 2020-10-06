@@ -8,8 +8,10 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.batch.api.chunk.ItemWriter;
+import javax.batch.operations.BatchRuntimeException;
 import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
+import javax.batch.runtime.BatchStatus;
 import javax.batch.runtime.context.JobContext;
 import javax.inject.Inject;
 
@@ -35,6 +37,7 @@ public class AllFeedsWriter implements ItemWriter {
     Set<Long> executions;
 
     int postsCount;
+    boolean failed = false;
 
     @Override
     public void open(Serializable checkpoint) throws Exception {
@@ -61,6 +64,7 @@ public class AllFeedsWriter implements ItemWriter {
         int timeout = Integer.parseInt(System.getProperty("timeout", "10"));
 
         // Wait on all executions
+
         for (long instanceId : executions) {
             final JobExecutionImpl exec = (JobExecutionImpl) jobOperator.getJobExecution(instanceId);
 
@@ -69,14 +73,23 @@ public class AllFeedsWriter implements ItemWriter {
 
             int count = Integer.parseInt(exec.getExitStatus());
             postsCount = postsCount + count;
+
+            if (exec.getBatchStatus().compareTo(BatchStatus.COMPLETED) != 0) {
+                failed = true;
+            }
             // To save memory delete execution from jberets
         }
+
     }
 
     @Override
     public void close() throws Exception {
         MongoClientProvider.destroy();
         jobContext.setExitStatus("" + postsCount);
+
+        if (failed) {
+            throw new BatchRuntimeException("One of job failed");
+        }
     }
 
     @Override
