@@ -2,7 +2,6 @@ package org.jboss.planet.feeds2mongo.batch;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +15,7 @@ import javax.inject.Inject;
 
 import org.jberet.runtime.JobExecutionImpl;
 import org.jboss.logging.Logger;
+import org.jboss.planet.feeds2mongo.batch.model.FeedConfig;
 
 public class AllFeedsWriter implements ItemWriter {
     private Logger log = Logger.getLogger(AllFeedsConfigReader.class);
@@ -37,12 +37,13 @@ public class AllFeedsWriter implements ItemWriter {
     @Override
     public void writeItems(List<Object> items) throws Exception {
         for (Object item : items) {
-            Map<String, Object> feedConfig = (Map<String, Object>) item;
+            FeedConfig feedConfig = (FeedConfig) item;
             index++;
             log.infof("Job scheduled. index=%s, feed=%s", index, item);
             Properties prop = new Properties(jobProperties);
-            prop.setProperty("url", feedConfig.get("url").toString());
-            prop.setProperty("feed", feedConfig.get("code").toString());
+            prop.setProperty("url", feedConfig.getUrl());
+            prop.setProperty("feed", feedConfig.getCode());
+            prop.setProperty("group", feedConfig.getGroup());
             jobOperator.start("process-feed.xml", prop);
         }
     }

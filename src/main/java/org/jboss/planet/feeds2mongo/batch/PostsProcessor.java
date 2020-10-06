@@ -28,10 +28,13 @@ public class PostsProcessor implements ItemProcessor {
         if (feed == null) {
             throw new BatchRuntimeException("job parameter `feed` must be defined");
         }
-        return validateAndConvert(post, feed);
+        String group = jobProperties.getProperty("group");
+        return validateAndConvert(post, feed, group);
     }
-    public static Document validateAndConvert(SyndEntry post, String feed) throws PostValidationException {
+    public static Document validateAndConvert(SyndEntry post, String feed, String group) throws PostValidationException {
         Document document = new Document("feed", feed);
+        document.append("group", group);
+
         String title = normalizeString(post.getTitle());
         if (StringUtils.isBlank(title)) {
             throw new PostValidationException("Title is empty");

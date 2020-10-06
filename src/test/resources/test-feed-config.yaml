@@ -1,4 +1,5 @@
-- code: test1
-  url: /test-feed.xml
-- code: test2
-  url: /test-feed2.xml
+- test-group:
+  - code: test1
+    url: /test-feed.xml
+  - code: test2
+    url: /test-feed2.xml

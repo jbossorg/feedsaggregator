@@ -18,6 +18,6 @@ public class PostsProcessorTest {
     public void testTitleValidity() throws PostValidationException {
         SyndEntry post = getPost();
         post.setTitle("");
-        PostsProcessor.validateAndConvert(post, "test");
+        PostsProcessor.validateAndConvert(post, "test", null);
     }
 }
