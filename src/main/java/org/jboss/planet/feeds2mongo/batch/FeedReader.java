@@ -45,14 +45,13 @@ public class FeedReader implements ItemReader {
     public void open(final Serializable checkpoint) throws Exception {
         Properties jobProperties = getJobParameter(jobContext);
 
-        log.infof("Opening 'FeedReader'. feedreaderconfig=%s", jobProperties);
 
         feedUrl = jobProperties.getProperty("url");
         if (feedUrl == null) {
             throw new BatchRuntimeException("job parameter `url` must be defined");
         }
 
-        feedCode = jobProperties.getProperty("code");
+        feedCode = jobProperties.getProperty("feed");
 
         SyndFeedInput input = new SyndFeedInput();
         if (feedUrl.startsWith("/")) {
@@ -68,6 +67,8 @@ public class FeedReader implements ItemReader {
         } else {
             rowNumber = 0;
         }
+
+        log.infof("INDEX_PROCESS status=STARTED feed=%s url=%s", feedCode, feedUrl);
     }
 
     public static Properties getJobParameter(JobContext jobContext) {

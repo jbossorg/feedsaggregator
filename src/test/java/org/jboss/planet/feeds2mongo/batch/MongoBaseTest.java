@@ -72,6 +72,11 @@ public class MongoBaseTest {
 
     @AfterClass
     public static void oneTimeTearDown() {
+        mongoClient.close();
+
+        // Destroy also mongo client provider
+        MongoClientProvider.destroy();
+
         if (MONGO != null) {
             try {
                 MONGO.stop();

@@ -54,10 +54,7 @@ public class AllFeedsWriter implements ItemWriter {
             executions.add(executionId);
         }
         log.infof("All jobs scheduled. Count: %s", index);
-    }
 
-    @Override
-    public void close() throws Exception {
         int timeout = Integer.parseInt(System.getProperty("timeout", "10"));
 
         // Wait on all executions
@@ -68,6 +65,11 @@ public class AllFeedsWriter implements ItemWriter {
             exec.awaitTermination(timeout, TimeUnit.MINUTES);
             // To save memory delete execution from jberets
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+        MongoClientProvider.destroy();
     }
 
     @Override
