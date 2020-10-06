@@ -21,6 +21,9 @@
             <reader ref="feedReader"/>
             <processor ref="feedPostProcessor"/>
             <writer ref="feedMongoWriter"/>
+            <retryable-exception-classes>
+                <include class="java.net.SocketTimeoutException"/>
+            </retryable-exception-classes>
         </chunk>
     </step>
 </job>

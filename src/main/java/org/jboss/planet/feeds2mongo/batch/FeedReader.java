@@ -1,7 +1,9 @@
 package org.jboss.planet.feeds2mongo.batch;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.Properties;
 
@@ -21,6 +23,8 @@ import com.rometools.rome.io.XmlReader;
  * Read the feed from url and pass individual feed posts
  */
 public class FeedReader implements ItemReader {
+
+    private static final String USER_AGENT = "Java/11 planet.jboss.org";
 
     @Inject
     JobContext jobContext;
@@ -52,7 +56,7 @@ public class FeedReader implements ItemReader {
         if (feedUrl.startsWith("/")) {
             reader = new XmlReader(FeedReader.class.getResourceAsStream(feedUrl));
         } else {
-            reader = new XmlReader(new URL(feedUrl));
+            reader = new XmlReader(getConnection(feedUrl).getInputStream());
         }
         feed = input.build(reader);
         entries = feed.getEntries();
@@ -62,6 +66,16 @@ public class FeedReader implements ItemReader {
         } else {
             rowNumber = 0;
         }
+    }
+
+    protected URLConnection getConnection(String link) throws IOException {
+        URLConnection conn = new URL(link).openConnection();
+        conn.setReadTimeout(15000);
+        conn.setConnectTimeout(1000);
+        conn.setRequestProperty("User-Agent", USER_AGENT);
+        conn.connect();
+
+        return conn;
     }
 
     public static Properties getJobParameter(JobContext jobContext) {
