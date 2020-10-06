@@ -24,6 +24,9 @@ import de.flapdoodle.embed.mongo.distribution.Version;
 import de.flapdoodle.embed.process.config.IRuntimeConfig;
 import de.flapdoodle.embed.process.runtime.Network;
 
+/**
+ * Base test class with mongo support
+ */
 public class MongoBaseTest {
 
     private static Logger log = Logger.getLogger(MongoBaseTest.class);

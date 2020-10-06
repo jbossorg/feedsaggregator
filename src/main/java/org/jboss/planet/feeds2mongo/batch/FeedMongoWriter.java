@@ -18,7 +18,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
 
-public class MongoWriter implements ItemWriter {
+public class FeedMongoWriter implements ItemWriter {
 
     private Logger log = Logger.getLogger(FeedReader.class);
 

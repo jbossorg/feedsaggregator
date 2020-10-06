@@ -17,6 +17,9 @@ import org.jboss.logging.Logger;
 import org.jboss.planet.feeds2mongo.batch.model.FeedConfig;
 import org.yaml.snakeyaml.Yaml;
 
+/**
+ * Config reader for all feeds job. Reads configuration yaml file and converts it to List of {@link FeedConfig}
+ */
 public class AllFeedsConfigReader implements ItemReader {
 
     private Logger log = Logger.getLogger(AllFeedsConfigReader.class);
@@ -47,7 +50,7 @@ public class AllFeedsConfigReader implements ItemReader {
     public void open(Serializable checkpoint) throws Exception {
         Properties jobProperties = FeedReader.getJobParameter(jobContext);
 
-        log.infof("Opening job `AllFeedsConfigReader` with job properties %s", jobProperties);
+        log.infof("Opening job 'AllFeedsConfigReader'. allfeedsconfig=%s", jobProperties);
 
         String configUrl = jobProperties.getProperty("configUrl");
         if (configUrl == null) {

@@ -2,6 +2,10 @@ package org.jboss.planet.feeds2mongo.batch;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * test for running {@link ProcessAllFeedsTest} but with no DB test. Config URL is taken from system property
+ * 'configUrl'
+ */
 public class ConfigurationTestRun extends ProcessAllFeedsTest {
 
     @Override

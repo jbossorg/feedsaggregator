@@ -4,8 +4,8 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/batchXML_1_0.xsd">
     <ref id="feedReader" class="org.jboss.planet.feeds2mongo.batch.FeedReader"/>
-    <ref id="postsProcessor" class="org.jboss.planet.feeds2mongo.batch.PostsProcessor"/>
-    <ref id="mongoWriter" class="org.jboss.planet.feeds2mongo.batch.MongoWriter"/>
+    <ref id="feedPostProcessor" class="org.jboss.planet.feeds2mongo.batch.FeedPostProcessor"/>
+    <ref id="feedMongoWriter" class="org.jboss.planet.feeds2mongo.batch.FeedMongoWriter"/>
 
     <ref id="allFeedsConfigReader" class="org.jboss.planet.feeds2mongo.batch.AllFeedsConfigReader"/>
     <ref id="allFeedsWriter" class="org.jboss.planet.feeds2mongo.batch.AllFeedsWriter"/>

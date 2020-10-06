@@ -8,10 +8,11 @@ Application stores RSS/ATOM feeds to mongo DB.
 
 Configuration:
 1. `url` - URL of the feed to index
-2. `feed` - Code of the feed
-2. `mongoUrl` - Mongo URL
-3. `db` - DB Name
-4. `collection` - Collection name
+3. `feed` - Code of the feed
+4. `group` - Code of the feed group (Optional)
+5. `mongoUrl` - Mongo URL
+6. `db` - DB Name
+7. `collection` - Collection name
 
 ### 2. process-all-feeds.xml
 

@@ -1,3 +1,4 @@
+# test configuration file
 - test-group:
   - code: test1
     url: /test-feed.xml

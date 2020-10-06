@@ -14,7 +14,7 @@ import org.bson.Document;
 import com.rometools.rome.feed.synd.SyndContent;
 import com.rometools.rome.feed.synd.SyndEntry;
 
-public class PostsProcessor implements ItemProcessor {
+public class FeedPostProcessor implements ItemProcessor {
 
     @Inject
     JobContext jobContext;

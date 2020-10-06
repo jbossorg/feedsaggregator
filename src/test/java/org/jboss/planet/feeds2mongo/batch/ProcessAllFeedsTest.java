@@ -23,7 +23,7 @@ public class ProcessAllFeedsTest extends MongoBaseTest {
     private static final JobOperator jobOperator = BatchRuntime.getJobOperator();
 
     protected String getConfigUrl() throws Exception {
-        return ProcessFeedTest.getAbsoluteTestFilePath("/test-feed-config.yaml");
+        return ProcessFeedTest.getAbsoluteTestFilePath("/test-feeds-config.yaml");
     }
 
     @Test

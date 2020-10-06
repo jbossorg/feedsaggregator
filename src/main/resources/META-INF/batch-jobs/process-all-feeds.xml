@@ -3,6 +3,14 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd"
      version="1.0">
+    <!--
+        Job reads the configuration file (e.g. config/feeds-config.yaml) and process all feeds.
+        Required job properties:
+            1. `configUrl` - URL of configuration. e.g. file:///app/config/feeds-config.yaml
+            2. `mongoUrl` - Mongo URL
+            3. `db` - DB Name
+            4. `collection` - Collection name
+    -->
     <step id="processAllFeeds">
         <chunk>
             <reader ref="allFeedsConfigReader"/>

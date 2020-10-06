@@ -11,7 +11,6 @@ import javax.batch.runtime.BatchRuntime;
 import javax.batch.runtime.JobExecution;
 import javax.batch.runtime.context.JobContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.jboss.logging.Logger;
 
@@ -20,7 +19,9 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 
-@Named
+/**
+ * Read the feed from url and pass individual feed posts
+ */
 public class FeedReader implements ItemReader {
 
     private Logger log = Logger.getLogger(FeedReader.class);
@@ -44,7 +45,7 @@ public class FeedReader implements ItemReader {
     public void open(final Serializable checkpoint) throws Exception {
         Properties jobProperties = getJobParameter(jobContext);
 
-        log.infof("Opening job with job properties %s", jobProperties);
+        log.infof("Opening 'FeedReader'. feedreaderconfig=%s", jobProperties);
 
         feedUrl = jobProperties.getProperty("url");
         if (feedUrl == null) {

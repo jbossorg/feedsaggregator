@@ -5,7 +5,7 @@ import org.junit.Test;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndEntryImpl;
 
-public class PostsProcessorTest {
+public class FeedPostProcessorTest {
 
     protected SyndEntry getPost() {
         SyndEntry post = new SyndEntryImpl();
@@ -18,6 +18,6 @@ public class PostsProcessorTest {
     public void testTitleValidity() throws PostValidationException {
         SyndEntry post = getPost();
         post.setTitle("");
-        PostsProcessor.validateAndConvert(post, "test", null);
+        FeedPostProcessor.validateAndConvert(post, "test", null);
     }
 }

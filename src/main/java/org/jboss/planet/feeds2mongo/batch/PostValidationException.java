@@ -1,5 +1,8 @@
 package org.jboss.planet.feeds2mongo.batch;
 
+/**
+ * Exception to indicate post in feed is invalid
+ */
 public class PostValidationException extends Exception {
     public PostValidationException() {
     }

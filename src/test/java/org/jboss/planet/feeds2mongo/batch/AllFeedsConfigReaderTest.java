@@ -15,7 +15,7 @@ public class AllFeedsConfigReaderTest {
 
     @Test
     public void getConfig() throws IOException {
-        InputStream is = AllFeedsConfigReaderTest.class.getResourceAsStream("/test-feed-config.yaml");
+        InputStream is = AllFeedsConfigReaderTest.class.getResourceAsStream("/test-feeds-config.yaml");
         List<FeedConfig> config = AllFeedsConfigReader.getConfig(is);
         is.close();
 

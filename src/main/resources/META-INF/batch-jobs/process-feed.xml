@@ -3,11 +3,21 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd"
      version="1.0">
-    <step id="processPosts">
+    <!--
+        Job process individual RSS/ATOM feed.
+        Required input job properties:
+            1. `url` - URL of the feed to index
+            2. `feed` - code of the feed
+            3. `group` - group code of the feed (Optional)
+            4. `mongoUrl` - Mongo URL
+            5. `db` - DB Name
+            6. `collection` - Collection name
+    -->
+    <step id="processFeed">
         <chunk>
             <reader ref="feedReader"/>
-            <processor ref="postsProcessor"/>
-            <writer ref="mongoWriter"/>
+            <processor ref="feedPostProcessor"/>
+            <writer ref="feedMongoWriter"/>
         </chunk>
     </step>
 </job>

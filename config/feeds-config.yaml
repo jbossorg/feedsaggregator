@@ -1,3 +1,16 @@
+# Configuration for `process-all-feeds.xml` job.
+# Structure:
+# - group1:
+#   - code: feedcode1
+#     url: feedurl1
+#   - code: feedcode2
+#     url: feedurl2
+# - group2:
+#   - code: feedcode3
+#     url: feedurl3
+#   - code: feedcode4
+#     url: feedurl4
+
 - quarkus:
   - code: quarkus
     url: https://quarkus.io/feed.xml
