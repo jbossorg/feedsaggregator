@@ -41,7 +41,8 @@ public class ProcessFeedTest extends MongoBaseTest {
         Assert.assertEquals(1, collection.countDocuments());
 
         Document post = collection.find(Filters.eq("url", "https://example.com/blog/post1/")).first();
-        Assert.assertEquals("test-title", post.get("title"));
+        Assert.assertEquals("Test Title", post.get("title"));
+        Assert.assertEquals("test_title", post.get("code"));
     }
 
     public static String getAbsoluteTestFilePath(String name) throws URISyntaxException {

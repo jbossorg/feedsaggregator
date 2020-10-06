@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
+import org.jboss.planet.feeds2mongo.StringTools;
 
 import com.rometools.rome.feed.synd.SyndContent;
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -40,6 +41,8 @@ public class FeedPostProcessor implements ItemProcessor {
             throw new PostValidationException("Title is empty");
         }
         document.append("title", title);
+
+        document.append("code", StringTools.title2Code(title));
 
         String link = normalizeString(post.getLink());
         if (StringUtils.isBlank(link)) {
