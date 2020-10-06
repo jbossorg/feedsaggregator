@@ -67,7 +67,7 @@ public class FeedReader implements ItemReader {
             rowNumber = 0;
         }
 
-        log.infof("[%s] INDEX_PROCESS status=STARTED feed=%s url=%s", Thread.currentThread().getName(), feedCode, feedUrl);
+        log.infof("[%s] JOB_PROCESS status=STARTED feed=%s url=%s", Thread.currentThread().getName(), feedCode, feedUrl);
     }
 
     public static Properties getJobParameter(JobContext jobContext) {

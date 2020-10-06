@@ -48,7 +48,7 @@ public class AllFeedsConfigReader implements ItemReader {
     @Override
     public void open(Serializable checkpoint) throws Exception {
         started = System.currentTimeMillis();
-        log.infof("INDEX_PROCESS_ALL status=STARTED timestamp=%s", new Date(started));
+        log.infof("JOB_PROCESS_ALL status=STARTED timestamp='%s'", new Date(started));
 
         Properties jobProperties = FeedReader.getJobParameter(jobContext);
         log.debugf("Opening job 'AllFeedsConfigReader'. allfeedsconfig=%s", jobProperties);
@@ -81,7 +81,7 @@ public class AllFeedsConfigReader implements ItemReader {
     public void close() throws Exception {
         finished = System.currentTimeMillis();
         long durationSec = (finished - started) / 1000;
-        log.infof("INDEX_PROCESS_ALL status=COMPLETED timestamp=%s durationSec=%s", new Date(finished), durationSec);
+        log.infof("JOB_PROCESS_ALL status=COMPLETED timestamp='%s' durationSec=%s postsCount=%s", new Date(finished), durationSec, jobContext.getExitStatus());
     }
 
     @Override

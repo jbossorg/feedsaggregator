@@ -57,7 +57,8 @@ public class FeedMongoWriter implements ItemWriter {
 
     @Override
     public void close() throws Exception {
-        log.infof("[%s] INDEX_PROCESS status=COMPLETED feed=%s count=%s", Thread.currentThread().getName(),  feed, count);
+        log.infof("[%s] JOB_PROCESS status=COMPLETED feed=%s count=%s", Thread.currentThread().getName(),  feed, count);
+        jobContext.setExitStatus("" + count);
     }
 
     @Override

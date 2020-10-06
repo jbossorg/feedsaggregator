@@ -34,10 +34,13 @@ public class AllFeedsWriter implements ItemWriter {
 
     Set<Long> executions;
 
+    int postsCount;
+
     @Override
     public void open(Serializable checkpoint) throws Exception {
         jobProperties = FeedReader.getJobParameter(jobContext);
         executions = new HashSet<>();
+        postsCount = 0;
     }
 
     @Override
@@ -63,6 +66,9 @@ public class AllFeedsWriter implements ItemWriter {
 
             log.infof("Waiting for job completion jobInstance=%s timeout=%smin", instanceId, timeout);
             exec.awaitTermination(timeout, TimeUnit.MINUTES);
+
+            int count = Integer.parseInt(exec.getExitStatus());
+            postsCount = postsCount + count;
             // To save memory delete execution from jberets
         }
     }
@@ -70,6 +76,7 @@ public class AllFeedsWriter implements ItemWriter {
     @Override
     public void close() throws Exception {
         MongoClientProvider.destroy();
+        jobContext.setExitStatus("" + postsCount);
     }
 
     @Override
