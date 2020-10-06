@@ -3,10 +3,7 @@ package org.jboss.planet.feeds2mongo.batch;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import javax.batch.api.chunk.ItemReader;
 import javax.batch.operations.BatchRuntimeException;
@@ -31,6 +28,8 @@ public class AllFeedsConfigReader implements ItemReader {
 
     private int index;
 
+    private long started, finished;
+
     public static List<FeedConfig> getConfig(InputStream is) {
         Yaml config = new Yaml();
         List<Map<String, List<Map>>> confs = config.load(is);
@@ -48,9 +47,11 @@ public class AllFeedsConfigReader implements ItemReader {
 
     @Override
     public void open(Serializable checkpoint) throws Exception {
-        Properties jobProperties = FeedReader.getJobParameter(jobContext);
+        started = System.currentTimeMillis();
+        log.infof("INDEX_PROCESS_ALL status=STARTED timestamp=%s", new Date(started));
 
-        log.infof("Opening job 'AllFeedsConfigReader'. allfeedsconfig=%s", jobProperties);
+        Properties jobProperties = FeedReader.getJobParameter(jobContext);
+        log.debugf("Opening job 'AllFeedsConfigReader'. allfeedsconfig=%s", jobProperties);
 
         String configUrl = jobProperties.getProperty("configUrl");
         if (configUrl == null) {
@@ -78,6 +79,9 @@ public class AllFeedsConfigReader implements ItemReader {
 
     @Override
     public void close() throws Exception {
+        finished = System.currentTimeMillis();
+        long durationSec = (finished - started) / 1000;
+        log.infof("INDEX_PROCESS_ALL status=COMPLETED timestamp=%s durationSec=%s", new Date(finished), durationSec);
     }
 
     @Override
