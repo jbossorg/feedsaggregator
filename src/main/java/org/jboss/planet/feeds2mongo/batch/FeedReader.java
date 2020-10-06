@@ -45,7 +45,6 @@ public class FeedReader implements ItemReader {
     public void open(final Serializable checkpoint) throws Exception {
         Properties jobProperties = getJobParameter(jobContext);
 
-
         feedUrl = jobProperties.getProperty("url");
         if (feedUrl == null) {
             throw new BatchRuntimeException("job parameter `url` must be defined");
@@ -68,7 +67,7 @@ public class FeedReader implements ItemReader {
             rowNumber = 0;
         }
 
-        log.infof("INDEX_PROCESS status=STARTED feed=%s url=%s", feedCode, feedUrl);
+        log.infof("[%s] INDEX_PROCESS status=STARTED feed=%s url=%s", Thread.currentThread().getName(), feedCode, feedUrl);
     }
 
     public static Properties getJobParameter(JobContext jobContext) {

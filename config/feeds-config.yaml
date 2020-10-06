@@ -11,9 +11,15 @@
 #   - code: feedcode4
 #     url: feedurl4
 
+- aerogear:
+    - code: aeroGear
+      url: http://corinnekrych.blogspot.com/feeds/posts/default?alt=rss
 - quarkus:
-  - code: quarkus
-    url: https://quarkus.io/feed.xml
+    - code: quarkus
+      url: https://quarkus.io/feed.xml
+- keycloak:
+    - code: keycloak
+      url: https://www.keycloak.org/rss.xml
 - nonmiddelware:
-  - code: developers
-    url: https://developers.redhat.com/blog/feed/atom/
+    - code: redhat_developer_blog
+      url: https://developers.redhat.com/blog/feed/
