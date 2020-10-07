@@ -27,6 +27,7 @@
             </skippable-exception-classes>
             <retryable-exception-classes>
                 <include class="java.net.SocketTimeoutException"/>
+                <include class="java.net.UnknownHostException"/>
             </retryable-exception-classes>
         </chunk>
     </step>
