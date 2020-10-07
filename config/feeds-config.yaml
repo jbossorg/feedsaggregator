@@ -353,6 +353,10 @@
     - code: riftsaw
       title: 'RiftSaw Open Source BPEL'
       url: http://riftsaw.blogspot.com/feeds/posts/default
+- quarkus:
+    - code: quarkus
+      title: 'Quarkus'
+      url: https://quarkus.io/feed.xml
 - savara:
     - code: savara
       title: 'SAVARA - From Art to Engineering'
