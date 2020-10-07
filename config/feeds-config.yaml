@@ -11,15 +11,379 @@
 #   - code: feedcode4
 #     url: feedurl4
 
+# planet.jboss.org configuration
+
 - aerogear:
-    - code: aerogear
+    - code: corinnekrych
+      title: 'chat & code'
       url: http://corinnekrych.blogspot.com/feeds/posts/default?alt=rss
-- quarkus:
-    - code: quarkus
-      url: https://quarkus.io/feed.xml
+    - code: cvasilak
+      title: 'Christos Vasilakis'
+      url: http://cvasilak.blogspot.ch/feeds/posts/default/-/aerogear
+# Throws <HR> Exception.
+#- apiman:
+#    - code: apiman
+#      title: 'apiman blog'
+#      url: http://www.apiman.io/blog/feed.xml
+- arquillian:
+    - code: arquillian
+      title: 'Arquillian'
+      url: http://arquillian.org/blog/atom.xml
+- blacktie:
+    - code: blacktie
+      title: 'Blacktie'
+      url: http://jboss-blacktie.blogspot.com/feeds/posts/default
+- byteman:
+    - code: byteman
+      title: 'Byteman Project Blog'
+      url: http://bytemanblog.blogspot.com/feeds/posts/default?alt=rss
+- capedwarf:
+    - code: capedwarf
+      title: 'CapeDwarf Blog'
+      url: http://capedwarf.org/blog.atom
+- cdi:
+    - code: cdi
+      title: 'Contexts and Dependency Injection'
+      url: http://www.cdi-spec.org/news.atom
+- drools:
+    - code: drools
+      title: 'Drools - Because Knowledge Matters'
+      url: http://feeds.athico.com/DroolsAtom?format=xml
+- ejb3:
+    - code: carlo
+      title: 'Carlo''s Blog'
+      url: http://wolf-71.blogspot.com/feeds/posts/default
+- errai:
+    - code: errai
+      title: 'Errai Developer Blog'
+      url: http://errai-blog.blogspot.com/feeds/posts/default
+- escalante:
+    - code: escalante
+      title: 'Escalante'
+      url: http://escalante.io/news.atom
+- events:
+    - code: torqueboxevents
+      title: 'TorqueBox'
+      url: http://torquebox.org/news/tags/event.atom
+- fusesource:
+    - code: jonanstey
+      title: 'Jon Anstey''s Blog'
+      url: http://janstey.blogspot.com/feeds/posts/default
+- fusesource:
+    - code: timbish
+      title: 'Thoughts of Tim Bish'
+      url: http://timbish.blogspot.com/feeds/posts/default
+- fusesource:
+    - code: ioanniscanellos
+      title: 'Ioannis Canellos Blog'
+      url: http://iocanel.blogspot.com/feeds/posts/default
+    - code: freemanfang
+      title: 'Freeman Fang''s Blog'
+      url: http://freemanfang.blogspot.com/feeds/posts/default
+    - code: larsheinemann
+      title: 'Lars Heinemann''s Blog'
+      url: http://lhein.blogspot.com/feeds/posts/default
+    - code: clausibsen
+      title: 'Claus Ibsen (@davsclaus) riding the Apache Camel'
+      url: http://www.davsclaus.com/feeds/posts/default
+    - code: jakubkorab
+      title: 'Jakub Korab'
+      url: http://feeds.feedburner.com/JakubKorab
+    - code: jamesstrachan
+      title: 'James Strachan''s Blog'
+      url: http://macstrac.blogspot.com/feeds/posts/default
+    - code: garytully
+      title: 'Gary Tully''s blog'
+      url: http://blog.garytully.com/feeds/posts/default
+    - code: davidvaleri
+      title: 'David Valeri''s Blog'
+      url: https://davidvaleri.wordpress.com/feed/
+    - code: paoloantinori
+      title: 'Someday Never Comes'
+      url: http://giallone.blogspot.com/feeds/posts/default
+    - code: ofbizian
+      title: 'Bilgin Ibryam''s Open Source Journeys'
+      url: http://www.ofbizian.com/feeds/posts/default
+    - code: davsclaus
+      title: 'Claus Ibsen (@davsclaus) riding the Apache Camel'
+      url: http://feeds2.feedburner.com/ApacheCamel
+    - code: lhein
+      title: 'Lars Heinemann''s Blog'
+      url: http://lhein.blogspot.de//feeds/posts/default
+    - code: charles_moulliard
+      title: 'Charles Moulliard''s blog'
+      url: http://cmoulliard.github.io/feed.xml
+    - code: rockablogbaby
+      title: 'Rock a Blog Baby'
+      url: http://rockablogbaby.blogspot.com/feeds/posts/default
+    - code: nicolaferraro
+      title: 'Nicola Ferraro Blog'
+      url: https://www.nicolaferraro.me/feed.xml
+    - code: lburgazzoli
+      title: '.: lb :.'
+      url: https://lburgazzoli.github.io/rss/
+- global:
+    - code: andy_miller
+      title: 'Andrig''s JBoss Blog'
+      url: http://andrigjboss.blogspot.com/feeds/posts/default
+    - code: jbossws
+      title: 'Project JBossWS'
+      url: http://jbossws.blogspot.com/feeds/posts/default
+    - code: sensiblerational
+      title: 'Sensible Rationalization'
+      url: http://sensiblerationalization.blogspot.com/feeds/posts/default
+    - code: weeklyeditorial
+      title: 'Weekly Editorial'
+      url: https://www.jboss.org/atom.xml
+    - code: javalinuxit
+      title: 'Legolas in Minas Tirith'
+      url: http://feeds.feedburner.com/LegolasInMinasTirith
+    - code: ericschabell
+      title: 'Eric D. Schabell - JBoss'
+      url: http://feeds.feedburner.com/schabell/jboss
+    - code: rayploski
+      title: 'Ray Ploski''s Blog'
+      url: http://rayploski.blogspot.com/feeds/posts/default
+    - code: bdaw_jboss
+      title: 'Some letters and numbers'
+      url: http://bdawidowicz.blogspot.com/feeds/posts/default
+    - code: christinalineng
+      title: 'Christina Lin''s JBoss Blog'
+      url: http://wei-meilin.blogspot.tw/feeds/posts/default
+- global_community:
+    - code: ctpjava
+      title: 'CTP Java Community'
+      url: http://ctpjava.blogspot.com/feeds/posts/default/-/jboss
+    - code: biteoftech
+      title: 'A bite of technology'
+      url: http://abiteoftechnology.blogspot.com/feeds/posts/default
+    - code: lamida
+      title: 'lamida.net'
+      url: http://www.lamida.net/feeds/posts/default
+    - code: koentsje
+      title: 'Script for a Jester''s Tear'
+      url: http://koentsje.blogspot.com/feeds/posts/default?alt=rss
+    - code: bdaw_jbug
+      title: 'Some letters and numbers'
+      url: http://bdawidowicz.blogspot.com/feeds/posts/default
+- hibernate:
+    - code: no_relation_to
+      title: 'No Relation To - jboss'
+      url: http://feeds.feedburner.com/NoRelationTo-Jboss
+- hornetq:
+    - code: hornetq
+      title: 'The HornetQ Team Blog'
+      url: http://hornetq.blogspot.com/feeds/posts/default
+- infinispan:
+    - code: infinispan
+      title: 'Infinispan'
+      url: https://infinispan.org/feed.atom
+- jbossaop:
+    - code: jbossaop
+      title: 'JBoss AOP News'
+      url: http://jbossaop.blogspot.com/feeds/posts/default
+- jbossas:
+    - code: dimitris
+      title: 'Dimitris'' Thoughts'
+      url: http://feeds.feedburner.com/JBossOrgDimitrisThoughts
+    - code: kabir
+      title: 'Kabir Khan''s Blog'
+      url: http://kabir-khan.blogspot.com/feeds/posts/default
+    - code: managetheboss
+      title: 'Manage the Boss'
+      url: http://managetheboss.blogspot.com/feeds/posts/default
+    - code: darrans_wildfly_blog
+      title: 'Darran''s WildFly Blog'
+      url: http://darranl.blogspot.com/feeds/posts/default
+- jbossascommunity:
+    - code: vardlokkur
+      title: 'Warlock''s Thoughts'
+      url: http://vard-lokkur.blogspot.com/feeds/posts/default/-/JBoss
+    - code: navssurtani
+      title: 'Navin Surtani Personal Blog'
+      url: http://navssurtani.blogspot.com/feeds/posts/default?alt=rss
+    - code: cxf_tips
+      title: 'Technology highlights'
+      url: http://fandry.blogspot.com/feeds/posts/default?alt=rss
+    - code: spagop
+      title: 'Entries about middleware, enablement and other news ...'
+      url: http://feeds.feedburner.com/SergePagop
+- jbosscache:
+    - code: jbosscache_new
+      title: 'The official JBoss Cache blog'
+      url: http://jbosscache.blogspot.com/feeds/posts/default
+- jbossesb:
+    - code: jbossesb
+      title: 'JBoss ESB'
+      url: http://jbossesb.blogspot.com/feeds/posts/default
+- jbossjbpmcommunity:
+    - code: swiderskimaciej
+      title: 'Accelerate your business'
+      url: http://mswiderski.blogspot.com/feeds/posts/default
+- jbossmarshalling:
+    - code: dmlloyd_mar
+      title: 'David M. Lloyd'
+      url: http://dmlloyd.blogspot.com/feeds/posts/default
+- jbossmc:
+    - code: flaviarainone
+      title: 'Flavia Rainone''s Blog'
+      url: http://flaviarainone.blogspot.com/feeds/posts/default
+- jbossmessaging:
+    - code: clebert_suconic_
+      title: 'Clebert Suconic ''s Blog'
+      url: http://clebertsuconic.blogspot.com/feeds/posts/default
+- jbosson:
+    - code: heikowrupp
+      title: 'Some things to remember'
+      url: http://pilhuhn.blogspot.com/feeds/posts/default/-/JBoss
+- jbosson:
+    - code: ianspringer
+      title: 'Tidbits on Open Source Enterprise Java'
+      url: http://freshjava.blogspot.com/feeds/posts/default
+    - code: mazz
+      title: 'Thoughts from a Management Platform Developer'
+      url: http://management-platform.blogspot.com/feeds/posts/default
+    - code: jayshaughnessy
+      title: 'Digressions...'
+      url: http://jayshaughnessy.blogspot.com/feeds/posts/default
+    - code: johnsandablog
+      title: 'John Sanda''s blog'
+      url: http://johnsanda.blogspot.com/feeds/posts/default
+    - code: simeonsblog
+      title: 'Management Matters'
+      url: http://simeonpinder.blogspot.com/feeds/posts/default
+- jbossportal:
+    - code: jbossportal
+      title: 'JBoss Portal'
+      url: http://feeds.feedburner.com/jbossportal?format=xml
+- jbossportal:
+    - code: bdawidowicz
+      title: 'Not only Java'
+      url: http://bdawidowicz.blogspot.com/feeds/posts/default/-/jboss
+- jbossremoting:
+    - code: dmlloyd_rem
+      title: 'David M. Lloyd'
+      url: http://dmlloyd.blogspot.com/feeds/posts/default
+    - code: ron_sigal
+      title: 'Ron Sigal'
+      url: http://ronsigal.blogspot.com/feeds/posts/default
+- jbossrichfaces:
+    - code: pavolpitonak
+      title: 'Pavol Pitoňák''s Blog'
+      url: http://blog.pavol.pitonak.com/feeds/posts/default/-/RichFaces
+- jbossseamcommunity:
+    - code: solutionsfit
+      title: 'solutionsfit.com | Seam Framework 2E News'
+      url: http://solutionsfit.com/blog/category/jboss-seam-2e-news/feed
+    - code: lightguard
+      title: 'LightGuard''s Random Bytes'
+      url: http://lightguard-jp.blogspot.com/feeds/posts/default
+- jbosssecurity:
+    - code: jbosssecurity
+      title: 'Anil''s Security and Identity Management Blog'
+      url: http://anil-identity.blogspot.com/feeds/posts/default
+    - code: undertheelytron
+      title: 'Under The Elytron'
+      url: http://undertheelytron.blogspot.com/feeds/posts/default
+- jbosstools:
+    - code: jbosstools
+      title: 'JBossTools Blog'
+      url: http://jbosstools.blogspot.com/feeds/posts/default
+    - code: divbyzero
+      title: 'DivByZero'
+      url: http://divby0.blogspot.com/feeds/posts/default/-/jboss
+- jbosstransactions:
+    - code: transactions
+      title: 'JBossTS team blog'
+      url: http://jbossts.blogspot.com/feeds/posts/default
+- jbossweb:
+    - code: remm
+      title: 'Remm''s adventures In Linux'
+      url: http://remm.blogspot.com/feeds/posts/default
+- jbosswise:
+    - code: jbosswise
+      title: 'Wise Invoke Service Easily'
+      url: http://feeds.feedburner.com/jbosswise?format=xml
+- jbpm:
+    - code: koenaers
+      title: 'Script for a Jester''s Tear'
+      url: http://koentsje.blogspot.com/feeds/posts/default
+    - code: enterprisebpm
+      title: 'Enterprise BPM'
+      url: http://enterprisebpm.blogspot.com/feeds/posts/default
+    - code: kverlaen
+      title: 'Processes, Rules and Events'
+      url: http://kverlaen.blogspot.com/feeds/posts/default
+- jbugs:
+    - code: sergepagop
+      title: 'Serge Pagop''s Blog'
+      url: http://sergepagop.blogspot.com/feeds/posts/default
+- jgroups:
+    - code: belasblog
+      title: 'Belas Blog'
+      url: http://belaban.blogspot.com/feeds/posts/default
+- jsfunit:
+    - code: jsfunit
+      title: 'Test, Test, JSF'
+      url: http://jsfunit.blogspot.com/feeds/posts/default
 - keycloak:
     - code: keycloak
+      title: 'Keycloak'
       url: https://www.keycloak.org/rss.xml
-- nonmiddelware:
+- management:
+    - code: bryanche
+      title: 'Bryan''s Blog'
+      url: http://bryanche.blogspot.com/feeds/posts/default
+    - code: monitoring_with_hawkular
+      title: 'Monitoring with Hawkular'
+      url: https://medium.com/feed/monitoring/tagged/hawkular
+- nonmiddleware:
     - code: redhat_developer_blog
+      title: 'Red Hat Developer Blog'
       url: https://developers.redhat.com/blog/feed/
+- osgi:
+    - code: osgithoughts
+      title: 'OSGi thoughts'
+      url: http://osgithoughts.blogspot.com/feeds/posts/default
+- picketlink:
+    - code: picketlink
+      title: 'JBoss Authz - Rule Based Authorization Framework'
+      url: http://authz.blogspot.com/feeds/posts/default
+- riftsaw:
+    - code: riftsaw
+      title: 'RiftSaw Open Source BPEL'
+      url: http://riftsaw.blogspot.com/feeds/posts/default
+- savara:
+    - code: savara
+      title: 'SAVARA - From Art to Engineering'
+      url: http://jboss-savara.blogspot.com/feeds/posts/default
+- soagovernance:
+    - code: soagovernance
+      title: 'Overlord'
+      url: http://jboss-overlord.blogspot.com/feeds/posts/default
+- soap:
+    - code: soap
+      title: 'JBoss SOA Platform'
+      url: http://jboss-soa-p.blogspot.com/feeds/posts/default
+- teiid:
+    - code: teiid
+      title: 'Teiid'
+      url: http://teiid.blogspot.com/feeds/posts/default
+- torquebox:
+    - code: torquebox
+      title: 'The TorqueBox Project'
+      url: http://torquebox.org/news.atom
+- wildfly:
+    - code: pedroigor
+      title: 'Pedro Igor''s WildFly Blog'
+      url: http://pcraveiro.blogspot.com/feeds/posts/default
+    - code: hal
+      title: 'HAL Management Console'
+      url: https://hal.github.io/blog/index.xml
+    - code: jucook
+      title: 'Justin''s WildFly Blog'
+      url: https://justinwildfly.blogspot.com/feeds/posts/default?alt=rss
+- xnio:
+    - code: dmlloyd_io
+      title: 'David M. Lloyd'
+      url: http://dmlloyd.blogspot.com/feeds/posts/default?category=i/o
