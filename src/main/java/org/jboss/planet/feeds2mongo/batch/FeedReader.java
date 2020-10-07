@@ -74,8 +74,8 @@ public class FeedReader implements ItemReader {
 
     protected URLConnection getConnection(String link) throws IOException {
         URLConnection conn = new URL(link).openConnection();
-        conn.setReadTimeout(15000);
-        conn.setConnectTimeout(1000);
+        conn.setReadTimeout(15000);   //15 sec
+        conn.setConnectTimeout(5000); //5 sec
         conn.setRequestProperty("User-Agent", USER_AGENT);
         conn.connect();
 

@@ -11,10 +11,13 @@ public class FeedConfig {
 
     String group;
 
-    public FeedConfig(String group, String code, String url) {
+    String author;
+
+    public FeedConfig(String group, String code, String url, String author) {
         this.code = code;
         this.url = url;
         this.group = group;
+        this.author = author;
     }
 
     public String getCode() {
@@ -39,5 +42,13 @@ public class FeedConfig {
 
     public void setGroup(String group) {
         this.group = group;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

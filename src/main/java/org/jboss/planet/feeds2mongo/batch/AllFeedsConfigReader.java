@@ -36,7 +36,7 @@ public class AllFeedsConfigReader implements ItemReader {
         for (Map<String, List<Map>> group : confs) {
             group.forEach((key, value) -> {
                 for (Map feed : value) {
-                    allFeeds.add(new FeedConfig(key, feed.get("code").toString(), feed.get("url").toString()));
+                    allFeeds.add(new FeedConfig(key, (String) feed.get("code"), (String) feed.get("url"), (String) feed.get("author")));
                 }
             });
         }

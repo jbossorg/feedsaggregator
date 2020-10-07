@@ -11,6 +11,7 @@
             <link>
                 https://example.com/blog/post1/
             </link>
+            <author>Author</author>
             <description>
                 blog post description
             </description>

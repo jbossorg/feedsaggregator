@@ -57,6 +57,9 @@ public class AllFeedsWriter implements ItemWriter {
             prop.setProperty("url", feedConfig.getUrl());
             prop.setProperty("feed", feedConfig.getCode());
             prop.setProperty("group", feedConfig.getGroup());
+            if (feedConfig.getAuthor() != null) {
+                prop.setProperty("author", feedConfig.getAuthor());
+            }
             // Skip DB Init. Covered by parent job.
             prop.setProperty(SetupMongoListener.SKIP_DB_INIT, "true");
             long executionId = jobOperator.start("process-feed.xml", prop);

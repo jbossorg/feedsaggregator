@@ -33,9 +33,10 @@ public class FeedPostProcessor implements ItemProcessor {
             throw new BatchRuntimeException("job parameter `feed` must be defined");
         }
         String group = jobProperties.getProperty("group");
-        return validateAndConvert(post, feed, group);
+        String defaultAuthor = jobProperties.getProperty("author");
+        return validateAndConvert(post, feed, group, defaultAuthor);
     }
-    public static Document validateAndConvert(SyndEntry post, String feed, String group) throws PostValidationException {
+    public static Document validateAndConvert(SyndEntry post, String feed, String group, String defaultAuthor) throws PostValidationException {
         Document document = new Document("feed", feed);
         document.append("group", group);
 
@@ -52,6 +53,12 @@ public class FeedPostProcessor implements ItemProcessor {
             throw new PostValidationException("Link is empty");
         }
         document.append("url", link);
+
+        if (defaultAuthor == null) {
+            document.append("author", StringUtils.trimToNull(post.getAuthor()));
+        } else {
+            document.append("author", defaultAuthor);
+        }
 
         Date publishedDate = post.getPublishedDate();
         if (publishedDate == null) {

@@ -18,6 +18,14 @@ public class FeedPostProcessorTest {
     public void testTitleValidity() throws PostValidationException {
         SyndEntry post = getPost();
         post.setTitle("");
-        FeedPostProcessor.validateAndConvert(post, "test", null);
+        FeedPostProcessor.validateAndConvert(post, "test", null, null);
     }
+    @Test(expected = PostValidationException.class)
+    public void testLinkValidity() throws PostValidationException {
+        SyndEntry post = getPost();
+        post.setLink("");
+        FeedPostProcessor.validateAndConvert(post, "test", null, null);
+    }
+
+
 }

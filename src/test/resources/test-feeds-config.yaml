@@ -3,4 +3,5 @@
   - code: test1
     url: /test-feed.xml
   - code: test2
+    author: 'Author from config'
     url: /test-feed2.xml

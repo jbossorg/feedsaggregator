@@ -2,6 +2,8 @@
 # Structure:
 # - group1:
 #   - code: feedcode1
+#     title: Feed title (Optional)
+#     author: Name of Author used instead of original Feed author (Optional)
 #     url: feedurl1
 #   - code: feedcode2
 #     url: feedurl2
@@ -356,6 +358,7 @@
 - quarkus:
     - code: quarkus
       title: 'Quarkus'
+      author: 'Quarkus Team'
       url: https://quarkus.io/feed.xml
 - savara:
     - code: savara

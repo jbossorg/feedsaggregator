@@ -14,6 +14,7 @@ The stored Blog post in Mongo looks like this:
     "title" : "Emitter - Bridging the imperative and the reactive worlds",
     "code" : "emitter_bridging_the_imperative_and_the_reactive_worlds",
     "url" : "https://quarkus.io/blog/reactive-messaging-emitter/",
+    "author" : "The Blogger",
     "published" : "2020-10-06T00:00:00.000Z",
     "updated" : "2020-10-06T00:00:00.000Z",
     "tags" : [ 

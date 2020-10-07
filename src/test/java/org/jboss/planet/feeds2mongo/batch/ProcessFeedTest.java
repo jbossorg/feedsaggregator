@@ -45,7 +45,28 @@ public class ProcessFeedTest extends MongoBaseTest {
         Document post = collection.find(Filters.eq("url", "https://example.com/blog/post1/")).first();
         Assert.assertEquals("Test Title", post.get("title"));
         Assert.assertEquals("test_title", post.get("code"));
-        Assert.assertArrayEquals(Arrays.asList("tag1", "tag2").toArray(), ((List)post.get("tags")).toArray());
+        Assert.assertEquals("Author", post.get("author"));
+        Assert.assertArrayEquals(Arrays.asList("tag1", "tag2").toArray(), ((List) post.get("tags")).toArray());
+    }
+
+    @Test
+    public void processTestFeedAuthorReplaceTest() throws Exception {
+        Properties prop = getMongoWriterProperties();
+        // by using same feed the blog is just updated
+        prop.setProperty("url", getAbsoluteTestFilePath("/test-feed.xml"));
+        prop.setProperty("feed", "test-feed");
+        prop.setProperty("author", "Author Replace");
+
+        final long jobExecutionId = jobOperator.start(jobName, prop);
+        final JobExecutionImpl jobExecution = (JobExecutionImpl) jobOperator.getJobExecution(jobExecutionId);
+        jobExecution.awaitTermination(5, TimeUnit.MINUTES);
+        Assert.assertEquals(BatchStatus.COMPLETED, jobExecution.getBatchStatus());
+
+        MongoCollection<Document> collection = getCollection();
+        Assert.assertEquals(1, collection.countDocuments());
+
+        Document post = collection.find(Filters.eq("url", "https://example.com/blog/post1/")).first();
+        Assert.assertEquals("Author Replace", post.get("author"));
     }
 
     public static String getAbsoluteTestFilePath(String name) throws URISyntaxException {
