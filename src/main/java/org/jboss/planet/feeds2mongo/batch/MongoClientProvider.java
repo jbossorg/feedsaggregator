@@ -13,7 +13,7 @@ public class MongoClientProvider {
 
     public static synchronized MongoClient getClient(String mongoUrl) {
         if (mongoClient == null) {
-            log.info("Creating mongo client.");
+            log.info("MONGO_CLIENT status=CREATED");
             mongoClient = MongoClients.create(mongoUrl);
         }
         return mongoClient;
@@ -21,7 +21,7 @@ public class MongoClientProvider {
 
     public static synchronized void destroy() {
         if (mongoClient != null) {
-            log.info("Closing mongo client.");
+            log.info("MONGO_CLIENT status=CLOSED");
             mongoClient.close();
             mongoClient = null;
         }

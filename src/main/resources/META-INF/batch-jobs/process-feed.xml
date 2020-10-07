@@ -15,6 +15,7 @@
     -->
     <listeners>
         <listener ref="loggingJobListener"/>
+        <listener ref="setupMongoListener"/>
     </listeners>
     <step id="processFeed">
         <chunk retry-limit="3">

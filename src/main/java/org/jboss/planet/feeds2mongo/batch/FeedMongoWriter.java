@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import org.bson.Document;
 import org.jboss.logging.Logger;
 
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
@@ -22,11 +23,8 @@ public class FeedMongoWriter implements ItemWriter {
 
     @Inject
     JobContext jobContext;
-    private String mongoUrl;
-    private String dbName;
-    private String collectionName;
 
-    private static MongoCollection<Document> collection = null;
+    private MongoCollection<Document> collection = null;
 
     private Object feed;
     private int count;
@@ -34,23 +32,31 @@ public class FeedMongoWriter implements ItemWriter {
     @Override
     public void open(Serializable checkpoint) throws Exception {
         Properties jobProperties = FeedReader.getJobParameter(jobContext);
-
         log.infof("Opening mongoWriter job with job properties %s", jobProperties);
 
-        mongoUrl = jobProperties.getProperty("mongoUrl");
+        MongoClient client = FeedMongoWriter.getClient(jobProperties);
+        collection = getCollection(client, jobProperties);
+        count = 0;
+    }
+
+    public static MongoClient getClient(Properties jobProperties) {
+        String mongoUrl = jobProperties.getProperty("mongoUrl");
         if (mongoUrl == null) {
             throw new BatchRuntimeException("job parameter `mongoUrl` must be defined");
         }
-        dbName = jobProperties.getProperty("db");
+        return MongoClientProvider.getClient(mongoUrl);
+    }
+
+    public static MongoCollection<Document> getCollection(MongoClient client, Properties jobProperties) {
+        String dbName = jobProperties.getProperty("db");
         if (dbName == null) {
             throw new BatchRuntimeException("job parameter `db` must be defined");
         }
-        collectionName = jobProperties.getProperty("collection");
+        String collectionName = jobProperties.getProperty("collection");
         if (collectionName == null) {
             throw new BatchRuntimeException("job parameter `collection` must be defined");
         }
-        collection = MongoClientProvider.getClient(mongoUrl).getDatabase(dbName).getCollection(collectionName);
-        count = 0;
+        return client.getDatabase(dbName).getCollection(collectionName);
     }
 
     @Override

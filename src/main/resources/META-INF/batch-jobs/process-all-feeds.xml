@@ -17,6 +17,7 @@
                 <property name="logProperties" value="false"/>
             </properties>
         </listener>
+        <listener ref="setupMongoListener"/>
     </listeners>
     <step id="processAllFeeds">
         <chunk item-count="20">

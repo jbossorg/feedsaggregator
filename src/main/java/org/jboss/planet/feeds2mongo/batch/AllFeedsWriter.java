@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import org.jberet.runtime.JobExecutionImpl;
 import org.jboss.logging.Logger;
+import org.jboss.planet.feeds2mongo.batch.listener.SetupMongoListener;
 import org.jboss.planet.feeds2mongo.batch.model.FeedConfig;
 
 /**
@@ -56,6 +57,8 @@ public class AllFeedsWriter implements ItemWriter {
             prop.setProperty("url", feedConfig.getUrl());
             prop.setProperty("feed", feedConfig.getCode());
             prop.setProperty("group", feedConfig.getGroup());
+            // Skip DB Init. Covered by parent job.
+            prop.setProperty(SetupMongoListener.SKIP_DB_INIT, "true");
             long executionId = jobOperator.start("process-feed.xml", prop);
             executions.add(executionId);
         }
@@ -84,7 +87,6 @@ public class AllFeedsWriter implements ItemWriter {
 
     @Override
     public void close() throws Exception {
-        MongoClientProvider.destroy();
         jobContext.setExitStatus("" + postsCount);
 
         if (failed) {

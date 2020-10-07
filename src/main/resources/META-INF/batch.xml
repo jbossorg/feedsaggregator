@@ -11,4 +11,5 @@
     <ref id="allFeedsWriter" class="org.jboss.planet.feeds2mongo.batch.AllFeedsWriter"/>
 
     <ref id="loggingJobListener" class="org.jboss.planet.feeds2mongo.batch.listener.LoggingJobListener" />
+    <ref id="setupMongoListener" class="org.jboss.planet.feeds2mongo.batch.listener.SetupMongoListener"/>
 </batch-artifacts>
