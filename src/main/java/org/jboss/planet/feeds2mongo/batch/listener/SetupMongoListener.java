@@ -18,7 +18,8 @@ import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.Indexes;
 
 /**
- * Job listener to manage Mongo DB client and perform DB initialization. If job property `SETUP_MONGO_LISTENER_SKIP` is set then no operation is performed
+ * Job listener to manage Mongo DB client and perform DB initialization. If job property `SETUP_MONGO_LISTENER_SKIP` is
+ * set then no operation is performed
  */
 public class SetupMongoListener implements JobListener {
 
@@ -32,6 +33,7 @@ public class SetupMongoListener implements JobListener {
     public boolean skip;
 
     public static final String INDEX_URL = "_url_";
+    public static final String INDEX_CODE = "_code_";
 
     @Override
     public void beforeJob() throws Exception {
@@ -52,14 +54,27 @@ public class SetupMongoListener implements JobListener {
     protected void initDb(MongoCollection<Document> collection) {
 
         boolean createUrlIndex = true;
+        boolean createCodeIndex = true;
         for (Document index : collection.listIndexes()) {
-            if (!index.containsKey(INDEX_URL)) {
+            log.debugf("index: %s", index);
+            String idxName = index.get("name").toString();
+            switch (idxName) {
+            case INDEX_URL:
                 createUrlIndex = false;
+                break;
+            case INDEX_CODE:
+                createCodeIndex = false;
             }
         }
         if (createUrlIndex) {
             log.infof("Creating index %s", INDEX_URL);
             collection.createIndex(Indexes.ascending("url"), new IndexOptions().name(INDEX_URL).unique(true));
+        }
+        if (createCodeIndex) {
+            log.infof("Creating index %s", INDEX_CODE);
+            // code index is not unique because different posts from different feeds can have same code. Only URL is
+            // unique
+            collection.createIndex(Indexes.ascending("code"), new IndexOptions().name(INDEX_CODE).unique(false));
         }
     }
 
