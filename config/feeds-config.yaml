@@ -3,7 +3,7 @@
 # - group1:
 #   - code: feedcode1
 #     title: Feed title (Optional)
-#     author: Name of Author used instead of original Feed author (Optional)
+#     author: Name of Author used if the original Feed author not present (Optional)
 #     url: feedurl1
 #   - code: feedcode2
 #     url: feedurl2
@@ -46,6 +46,7 @@
 - cdi:
     - code: cdi
       title: 'Contexts and Dependency Injection'
+      author: 'CDI'
       url: http://www.cdi-spec.org/news.atom
 - drools:
     - code: drools
@@ -62,6 +63,7 @@
 - escalante:
     - code: escalante
       title: 'Escalante'
+      author: 'Galder Zamarreño'
       url: http://escalante.io/news.atom
 - events:
     - code: torqueboxevents
@@ -114,6 +116,7 @@
       url: http://lhein.blogspot.de//feeds/posts/default
     - code: charles_moulliard
       title: 'Charles Moulliard''s blog'
+      author: 'Charles Moulliard'
       url: http://cmoulliard.github.io/feed.xml
     - code: rockablogbaby
       title: 'Rock a Blog Baby'
@@ -331,6 +334,7 @@
 - keycloak:
     - code: keycloak
       title: 'Keycloak'
+      author: 'Keycloak'
       url: https://www.keycloak.org/rss.xml
 - management:
     - code: bryanche
@@ -386,6 +390,7 @@
       url: http://pcraveiro.blogspot.com/feeds/posts/default
     - code: hal
       title: 'HAL Management Console'
+      author: 'hal'
       url: https://hal.github.io/blog/index.xml
     - code: jucook
       title: 'Justin''s WildFly Blog'

@@ -66,7 +66,8 @@ public class ProcessFeedTest extends MongoBaseTest {
         Assert.assertEquals(1, collection.countDocuments());
 
         Document post = collection.find(Filters.eq("url", "https://example.com/blog/post1/")).first();
-        Assert.assertEquals("Author Replace", post.get("author"));
+        // author should not be replaced !!!
+        Assert.assertEquals("Author", post.get("author"));
     }
 
     public static String getAbsoluteTestFilePath(String name) throws URISyntaxException {

@@ -54,11 +54,11 @@ public class FeedPostProcessor implements ItemProcessor {
         }
         document.append("url", link);
 
-        if (defaultAuthor == null) {
-            document.append("author", StringUtils.trimToNull(post.getAuthor()));
-        } else {
-            document.append("author", defaultAuthor);
+        String author = StringUtils.trimToNull(post.getAuthor());
+        if (author == null && defaultAuthor != null) {
+            author = defaultAuthor;
         }
+        document.append("author", author);
 
         Date publishedDate = post.getPublishedDate();
         if (publishedDate == null) {

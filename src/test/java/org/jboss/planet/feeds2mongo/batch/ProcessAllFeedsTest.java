@@ -46,6 +46,7 @@ public class ProcessAllFeedsTest extends MongoBaseTest {
         Document post = collection.find(Filters.eq("url", "https://example.com/blog/post1/")).first();
         Assert.assertEquals("Test Title", post.get("title"));
         Assert.assertEquals("test-group", post.get("group"));
+        Assert.assertEquals("Author", post.get("author"));
 
         Document post2 = collection.find(Filters.eq("url", "https://example.com/blog2/post1/")).first();
         Assert.assertEquals("Test Title 2", post2.get("title"));
