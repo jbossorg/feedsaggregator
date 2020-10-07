@@ -1,7 +1,9 @@
 package org.jboss.planet.feeds2mongo.batch;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.batch.api.chunk.ItemProcessor;
 import javax.batch.operations.BatchRuntimeException;
@@ -12,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 import org.jboss.planet.feeds2mongo.StringTools;
 
+import com.rometools.rome.feed.synd.SyndCategory;
 import com.rometools.rome.feed.synd.SyndContent;
 import com.rometools.rome.feed.synd.SyndEntry;
 
@@ -52,7 +55,7 @@ public class FeedPostProcessor implements ItemProcessor {
 
         Date publishedDate = post.getPublishedDate();
         if (publishedDate == null) {
-            throw new PostValidationException("pubDate is empty");
+            throw new PostValidationException("Published is empty");
         }
         document.append("published", publishedDate);
 
@@ -61,6 +64,17 @@ public class FeedPostProcessor implements ItemProcessor {
             updatedDate = publishedDate;
         }
         document.append("updated", updatedDate);
+
+
+        Set<String> tags = new HashSet<>();
+        for (Object categoryObj : post.getCategories()) {
+            SyndCategory category = (SyndCategory) categoryObj;
+            String tag = StringUtils.trimToNull(category.getName());
+            if (tag != null) {
+                tags.add(tag);
+            }
+        }
+        document.append("tags", tags);
 
         // Setting content
         String longestContent = post.getDescription() == null ? "" : post.getDescription().getValue();

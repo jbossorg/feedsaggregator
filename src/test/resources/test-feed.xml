@@ -18,6 +18,9 @@
             <guid>
                 https://example.com/blog/post1/
             </guid>
+            <category>tag1</category>
+            <category>   tag2  </category>
+            <category></category>
         </item>
 
     </channel>

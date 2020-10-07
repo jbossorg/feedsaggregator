@@ -4,6 +4,8 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -43,6 +45,7 @@ public class ProcessFeedTest extends MongoBaseTest {
         Document post = collection.find(Filters.eq("url", "https://example.com/blog/post1/")).first();
         Assert.assertEquals("Test Title", post.get("title"));
         Assert.assertEquals("test_title", post.get("code"));
+        Assert.assertArrayEquals(Arrays.asList("tag1", "tag2").toArray(), ((List)post.get("tags")).toArray());
     }
 
     public static String getAbsoluteTestFilePath(String name) throws URISyntaxException {
