@@ -34,6 +34,9 @@ public class SetupMongoListener implements JobListener {
 
     public static final String INDEX_URL = "_url_";
     public static final String INDEX_CODE = "_code_";
+    public static final String INDEX_PUBLISHED = "_published_";
+    public static final String INDEX_FEED = "_feed_";
+    public static final String INDEX_GROUP = "_group_";
 
     @Override
     public void beforeJob() throws Exception {
@@ -55,6 +58,9 @@ public class SetupMongoListener implements JobListener {
 
         boolean createUrlIndex = true;
         boolean createCodeIndex = true;
+        boolean createPublishedIndex = true;
+        boolean createFeedIndex = true;
+        boolean createGroupIndex = true;
         for (Document index : collection.listIndexes()) {
             log.debugf("index: %s", index);
             String idxName = index.get("name").toString();
@@ -64,6 +70,16 @@ public class SetupMongoListener implements JobListener {
                 break;
             case INDEX_CODE:
                 createCodeIndex = false;
+                break;
+            case INDEX_PUBLISHED:
+                createPublishedIndex = false;
+                break;
+            case INDEX_FEED:
+                createFeedIndex = false;
+                break;
+            case INDEX_GROUP:
+                createGroupIndex = false;
+                break;
             }
         }
         if (createUrlIndex) {
@@ -75,6 +91,18 @@ public class SetupMongoListener implements JobListener {
             // code index is not unique because different posts from different feeds can have same code. Only URL is
             // unique
             collection.createIndex(Indexes.ascending("code"), new IndexOptions().name(INDEX_CODE).unique(false));
+        }
+        if (createPublishedIndex) {
+            log.infof("Creating index %s", INDEX_PUBLISHED);
+            collection.createIndex(Indexes.descending("published"), new IndexOptions().name(INDEX_PUBLISHED).unique(false));
+        }
+        if (createFeedIndex) {
+            log.infof("Creating index %s", INDEX_FEED);
+            collection.createIndex(Indexes.descending("feed"), new IndexOptions().name(INDEX_FEED).unique(false));
+        }
+        if (createGroupIndex) {
+            log.infof("Creating index %s", INDEX_GROUP);
+            collection.createIndex(Indexes.descending("group"), new IndexOptions().name(INDEX_GROUP).unique(false));
         }
     }
 
