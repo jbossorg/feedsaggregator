@@ -36,7 +36,7 @@ public class LoggingJobListener implements JobListener {
         if (logProperties) {
             properties = FeedReader.getJobParameter(jobContext);
         }
-        log.logf(level, "[%s] JOB_EXECUTION status=STARTED job_name=%s job_execution_id=%s properties=%s", Thread.currentThread().getName(), jobContext.getJobName(), jobContext.getExecutionId(), properties);
+        log.logf(level, "JOB_EXECUTION status=STARTED job_name=%s job_execution_id=%s properties=%s", jobContext.getJobName(), jobContext.getExecutionId(), properties);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class LoggingJobListener implements JobListener {
         finished = System.currentTimeMillis();
         durationInMs = finished - started;
 
-        log.logf(level, "[%s] JOB_EXECUTION status=%s job_name=%s job_execution_id=%s job_duration_ms=%s processed_posts=%s", Thread.currentThread().getName(), jobContext.getBatchStatus(), jobContext.getJobName(),
-                jobContext.getExecutionId(), (int) durationInMs, jobContext.getExitStatus());
+        log.logf(level, "JOB_EXECUTION status=%s job_name=%s job_execution_id=%s job_duration_ms=%s processed_posts=%s", jobContext.getBatchStatus(), jobContext.getJobName(), jobContext.getExecutionId(), (int) durationInMs,
+                jobContext.getExitStatus());
     }
 }

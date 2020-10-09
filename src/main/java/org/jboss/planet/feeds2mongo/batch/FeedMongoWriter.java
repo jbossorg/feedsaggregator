@@ -19,7 +19,7 @@ import com.mongodb.client.model.FindOneAndReplaceOptions;
 
 public class FeedMongoWriter implements ItemWriter {
 
-    private Logger log = Logger.getLogger(FeedReader.class);
+    private Logger log = Logger.getLogger(FeedMongoWriter.class);
 
     @Inject
     JobContext jobContext;
@@ -32,7 +32,7 @@ public class FeedMongoWriter implements ItemWriter {
     @Override
     public void open(Serializable checkpoint) throws Exception {
         Properties jobProperties = FeedReader.getJobParameter(jobContext);
-        log.infof("Opening mongoWriter job with job properties %s", jobProperties);
+        log.debugf("Opening mongoWriter job with job properties %s", jobProperties);
 
         MongoClient client = FeedMongoWriter.getClient(jobProperties);
         collection = getCollection(client, jobProperties);

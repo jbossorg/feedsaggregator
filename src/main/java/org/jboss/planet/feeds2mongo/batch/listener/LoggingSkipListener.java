@@ -15,7 +15,7 @@ import org.jboss.logging.Logger;
  */
 public class LoggingSkipListener implements SkipReadListener, SkipProcessListener, SkipWriteListener {
 
-    protected static final Logger log = Logger.getLogger(LoggingJobListener.class);
+    protected static final Logger log = Logger.getLogger(LoggingSkipListener.class);
 
     protected void logMessage(Exception ex) {
         log.warnf("POST_PROCESS status=SKIP reason=%s", ex.getMessage());
