@@ -72,7 +72,7 @@ public class FeedMongoWriter implements ItemWriter {
             Document doc = (Document) item;
             Object postUrl = doc.get("url");
             this.feed = doc.get("feed");
-            log.debugf("[%s] Storing blog post: %s", Thread.currentThread().getName(), postUrl);
+            log.infof("[%s] Storing blog post: %s", Thread.currentThread().getName(), postUrl);
             log.tracef("Blog data: %s", doc);
 
             collection.findOneAndReplace(Filters.eq("url", postUrl), doc, replaceOptions);
