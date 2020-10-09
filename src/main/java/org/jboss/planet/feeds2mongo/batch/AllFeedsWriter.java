@@ -52,7 +52,6 @@ public class AllFeedsWriter implements ItemWriter {
         for (Object item : items) {
             FeedConfig feedConfig = (FeedConfig) item;
             index++;
-            log.infof("Job scheduled. index=%s, feed=%s", index, item);
             Properties prop = new Properties(jobProperties);
             prop.setProperty("url", feedConfig.getUrl());
             prop.setProperty("feed", feedConfig.getCode());
@@ -64,6 +63,7 @@ public class AllFeedsWriter implements ItemWriter {
             prop.setProperty(SetupMongoListener.SKIP_DB_INIT, "true");
             long executionId = jobOperator.start("process-feed.xml", prop);
             executions.add(executionId);
+            log.infof("JOB_EXECUTION status=SCHEDULED. index=%s job_execution_id=%s, feed=%s", index, executionId, feedConfig);
         }
         log.infof("All jobs scheduled. Count: %s", index);
 

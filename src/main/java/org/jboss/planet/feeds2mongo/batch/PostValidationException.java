@@ -11,6 +11,10 @@ public class PostValidationException extends Exception {
         super(message);
     }
 
+    public PostValidationException(String message, String postUrl) {
+        this(message + " post_url=" + postUrl);
+    }
+
     public PostValidationException(String message, Throwable cause) {
         super(message, cause);
     }

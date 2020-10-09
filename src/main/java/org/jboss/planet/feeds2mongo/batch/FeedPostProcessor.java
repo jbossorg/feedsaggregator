@@ -40,19 +40,19 @@ public class FeedPostProcessor implements ItemProcessor {
         Document document = new Document("feed", feed);
         document.append("group", group);
 
-        String title = normalizeString(post.getTitle());
-        if (StringUtils.isBlank(title)) {
-            throw new PostValidationException("Title is empty");
-        }
-        document.append("title", title);
-
-        document.append("code", StringTools.title2Code(title));
-
         String link = normalizeString(post.getLink());
         if (StringUtils.isBlank(link)) {
             throw new PostValidationException("Link is empty");
         }
         document.append("url", link);
+
+        String title = normalizeString(post.getTitle());
+        if (StringUtils.isBlank(title)) {
+            throw new PostValidationException("Title is empty.", link);
+        }
+        document.append("title", title);
+
+        document.append("code", StringTools.title2Code(title));
 
         String author = StringUtils.trimToNull(post.getAuthor());
         if (author == null && defaultAuthor != null) {
@@ -62,7 +62,7 @@ public class FeedPostProcessor implements ItemProcessor {
 
         Date publishedDate = post.getPublishedDate();
         if (publishedDate == null) {
-            throw new PostValidationException("Published is empty");
+            throw new PostValidationException("Published is empty", link);
         }
         document.append("published", publishedDate);
 

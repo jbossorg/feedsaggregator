@@ -18,6 +18,9 @@
         <listener ref="setupMongoListener"/>
     </listeners>
     <step id="processFeed">
+        <listeners>
+            <listener ref="loggingSkipListener" />
+        </listeners>
         <chunk retry-limit="3">
             <reader ref="feedReader"/>
             <processor ref="feedPostProcessor"/>

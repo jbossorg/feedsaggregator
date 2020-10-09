@@ -12,4 +12,5 @@
 
     <ref id="loggingJobListener" class="org.jboss.planet.feeds2mongo.batch.listener.LoggingJobListener" />
     <ref id="setupMongoListener" class="org.jboss.planet.feeds2mongo.batch.listener.SetupMongoListener"/>
+    <ref id="loggingSkipListener" class="org.jboss.planet.feeds2mongo.batch.listener.LoggingSkipListener"/>
 </batch-artifacts>

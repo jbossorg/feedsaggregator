@@ -51,4 +51,15 @@ public class FeedConfig {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("FeedConfig{");
+        sb.append("code='").append(code).append('\'');
+        sb.append(", url='").append(url).append('\'');
+        sb.append(", group='").append(group).append('\'');
+        sb.append(", author='").append(author).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
