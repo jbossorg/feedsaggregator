@@ -40,12 +40,12 @@ public class SetupMongoListener implements JobListener {
         Properties jobProperties = org.jboss.feedsagg.common.JobUtils.getJobParameter(jobContext);
 
         // This initialize mongoClient
-        MongoClient client = FeedMongoWriter.getClient(jobProperties);
+        MongoClient client = FeedPostMongoWriter.getClient(jobProperties);
 
         skip = Boolean.parseBoolean(jobProperties.getProperty(SKIP_DB_INIT, "false"));
 
         if (!skip) {
-            MongoCollection<Document> collection = FeedMongoWriter.getCollection(client, jobProperties);
+            MongoCollection<Document> collection = FeedPostMongoWriter.getCollection(client, jobProperties);
 
             initDb(collection);
         }

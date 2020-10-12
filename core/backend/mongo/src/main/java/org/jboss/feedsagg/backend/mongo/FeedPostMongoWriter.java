@@ -17,9 +17,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
 
-public class FeedMongoWriter implements ItemWriter {
+/**
+ * Stores individual {@link Document} to Mongo
+ */
+public class FeedPostMongoWriter implements ItemWriter {
 
-    private Logger log = Logger.getLogger(FeedMongoWriter.class);
+    private Logger log = Logger.getLogger(FeedPostMongoWriter.class);
 
     @Inject
     JobContext jobContext;
@@ -34,7 +37,7 @@ public class FeedMongoWriter implements ItemWriter {
         Properties jobProperties = org.jboss.feedsagg.common.JobUtils.getJobParameter(jobContext);
         log.debugf("Opening mongoWriter job with job properties %s", jobProperties);
 
-        MongoClient client = FeedMongoWriter.getClient(jobProperties);
+        MongoClient client = FeedPostMongoWriter.getClient(jobProperties);
         collection = getCollection(client, jobProperties);
         count = 0;
     }

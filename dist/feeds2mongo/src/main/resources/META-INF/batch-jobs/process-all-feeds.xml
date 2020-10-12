@@ -20,6 +20,7 @@
         <listener ref="setupMongoListener"/>
     </listeners>
     <step id="processAllFeeds">
+        <!-- The item-count defined how many feeds resp. jobs should be triggered at once -->
         <chunk item-count="20">
             <reader ref="allFeedsConfigReader"/>
             <writer ref="allFeedsWriter"/>

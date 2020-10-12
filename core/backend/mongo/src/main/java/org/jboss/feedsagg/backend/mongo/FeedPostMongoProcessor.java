@@ -12,13 +12,16 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
-import org.jboss.feedsagg.common.PostValidationException;
+import org.jboss.feedsagg.common.SkipItemException;
 
 import com.rometools.rome.feed.synd.SyndCategory;
 import com.rometools.rome.feed.synd.SyndContent;
 import com.rometools.rome.feed.synd.SyndEntry;
 
-public class FeedPostProcessor implements ItemProcessor {
+/**
+ * Transforms {@link SyndEntry} into {@link Document}
+ */
+public class FeedPostMongoProcessor implements ItemProcessor {
 
     @Inject
     JobContext jobContext;
@@ -36,7 +39,8 @@ public class FeedPostProcessor implements ItemProcessor {
         String defaultAuthor = jobProperties.getProperty("author");
         return validateAndConvert(post, feed, group, defaultAuthor);
     }
-    public static Document validateAndConvert(SyndEntry post, String feed, String group, String defaultAuthor) throws PostValidationException {
+
+    public static Document validateAndConvert(SyndEntry post, String feed, String group, String defaultAuthor) throws SkipItemException {
         Document document = new Document("feed", feed);
         if (StringUtils.isNotBlank(group)) {
             document.append("group", group);
@@ -44,13 +48,13 @@ public class FeedPostProcessor implements ItemProcessor {
 
         String link = normalizeString(post.getLink());
         if (StringUtils.isBlank(link)) {
-            throw new PostValidationException("Link is empty");
+            throw new SkipItemException("Link is empty");
         }
         document.append("url", link);
 
         String title = normalizeString(post.getTitle());
         if (StringUtils.isBlank(title)) {
-            throw new PostValidationException("Title is empty.", link);
+            throw new SkipItemException("Title is empty.", link);
         }
         document.append("title", title);
 
@@ -64,7 +68,7 @@ public class FeedPostProcessor implements ItemProcessor {
 
         Date publishedDate = post.getPublishedDate();
         if (publishedDate == null) {
-            throw new PostValidationException("Published is empty", link);
+            throw new SkipItemException("Published is empty", link);
         }
         document.append("published", publishedDate);
 
@@ -73,7 +77,6 @@ public class FeedPostProcessor implements ItemProcessor {
             updatedDate = publishedDate;
         }
         document.append("updated", updatedDate);
-
 
         Set<String> tags = new HashSet<>();
         for (Object categoryObj : post.getCategories()) {

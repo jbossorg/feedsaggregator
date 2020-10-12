@@ -26,7 +26,7 @@
             <processor ref="feedPostProcessor"/>
             <writer ref="feedMongoWriter"/>
             <skippable-exception-classes>
-                <include class="org.jboss.feedsagg.common.PostValidationException"/>
+                <include class="org.jboss.feedsagg.common.SkipItemException"/>
             </skippable-exception-classes>
             <retryable-exception-classes>
                 <include class="java.net.SocketTimeoutException"/>

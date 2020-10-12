@@ -12,7 +12,15 @@ Configuration:
 4. `feed` - Feed Name
 5. `group` - Group name (Optional)
 
-## Mongo DB Entries
+## Mongo DB
+
+### Indexes
+Indexes are being automatically created on these fields:
+1. `url` - unique
+2. `code`
+3. `published`
+4. `feed`
+5. `group`
 
 The stored Blog post in Mongo looks like this:
 

@@ -25,6 +25,7 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- Needed for printing out logs from jboss-logging -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>

@@ -11,7 +11,7 @@ import org.jboss.logging.Logger;
 /**
  * Logs warning if item has been skipped.
  * 
- * @see PostValidationException
+ * @see SkipItemException
  */
 public class LoggingSkipListener implements SkipReadListener, SkipProcessListener, SkipWriteListener {
 
