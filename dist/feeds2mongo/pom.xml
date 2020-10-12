@@ -16,6 +16,8 @@
     <properties>
         <version.mongo.flapdoodle>2.2.0</version.mongo.flapdoodle>
         <version.mongodb.driver>3.12.7</version.mongodb.driver>
+
+        <config.url>${project.baseUri}/../../config/feeds-config.yaml</config.url>
     </properties>
 
     <dependencies>
@@ -67,7 +69,41 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>config-test-included</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M5</version>
+                        <configuration>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <configUrl>${config.url}</configUrl>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
