@@ -1,11 +1,18 @@
 # Mongo Backend
 
+Component provides ItemProcessor and ItemWriter for storing Feed Entries into Mongo DB. 
+
+## Job Configuration
 
 The access to DB is configurable via jobs properties:
 Configuration: 
 1. `mongoUrl` - Mongo URL
 2. `db` - DB Name
 3. `collection` - Collection name
+4. `feed` - Feed Name
+5. `group` - Group name (Optional)
+
+## Mongo DB Entries
 
 The stored Blog post in Mongo looks like this:
 

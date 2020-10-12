@@ -1,14 +1,14 @@
 # Feeds Aggregator Distribution: feeds2mongo
 
-The distribution pack core components including mongo as backend.
+The distribution pack core components and use mongo as backend.
 
 ## Jobs
 
-These jobs are defined
+These jobs are preconfigured:
 
 ### 1. process-feed.xml
 
-Parses the given url and store all posts to DB
+Parses the given `url` and store all posts to DB
 
 Configuration:
 1. `url` - URL of the feed to index
@@ -28,16 +28,9 @@ Configuration:
 3. `db` - DB Name
 4. `collection` - Collection name
 
-The configuration stored in `/config/feeds-config.yaml` can be tested as part of junit test which stores data into in-memory mongoDB.
+## Deployment
 
-Simply run
-
-```
-mvn clean test -Pconfig-test-included
-```
-
-
-## How to run locally
+### How to run locally
 
 1. Start mongo
 
@@ -64,4 +57,22 @@ java -jar target/feeds2mongo.jar process-all-feeds.xml \
      mongoUrl=mongodb://localhost:27017 \
      db=feeds2mongo \
      collection=post
+```
+
+### How to run on Openshift
+
+TODO
+
+### How to run on Kubernetes
+
+TODO
+
+## How to test feeds-config.yaml as junit test
+
+The configuration stored in `/config/feeds-config.yaml` can be tested as part of junit test which stores data into in-memory mongoDB.
+
+Simply run
+
+```
+mvn clean test -Pconfig-test-included
 ```
