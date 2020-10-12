@@ -20,13 +20,15 @@
         <listener ref="setupMongoListener"/>
     </listeners>
     <step id="processAllFeeds">
-        <!-- The item-count defined how many feeds resp. jobs should be triggered at once -->
+        <!-- The `item-count` defines how many feeds resp. jobs should be triggered at once -->
         <chunk item-count="20">
             <reader ref="allFeedsConfigReader"/>
             <writer ref="allFeedsWriter">
                 <properties>
                     <!-- Optional property defining the name of job to trigger. Default is process-feed.xml -->
                     <property name="PROCESS_JOB_NAME" value="process-feed.xml"/>
+                    <!-- Optional property defining the timeout of triggered job. Default is 60 seconds. -1 is infinite -->
+                    <property name="PROCESS_JOB_TIMEOUT_SEC" value="60"/>
                 </properties>
             </writer>
         </chunk>

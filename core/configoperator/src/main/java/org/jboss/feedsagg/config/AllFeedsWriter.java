@@ -32,6 +32,10 @@ public class AllFeedsWriter implements ItemWriter {
     @BatchProperty(name = "PROCESS_JOB_NAME")
     String jobName = "process-feed.xml";
 
+    @Inject
+    @BatchProperty(name = "PROCESS_JOB_TIMEOUT_SEC")
+    int jobTimeout = 60;
+
     final JobOperator jobOperator = BatchRuntime.getJobOperator();
 
     Properties jobProperties;
@@ -71,15 +75,13 @@ public class AllFeedsWriter implements ItemWriter {
         }
         log.infof("All jobs scheduled. Count: %s", index);
 
-        int timeout = Integer.parseInt(System.getProperty("timeout", "10"));
-
         // Wait on all executions
 
         for (long instanceId : executions) {
             final JobExecutionImpl exec = (JobExecutionImpl) jobOperator.getJobExecution(instanceId);
 
-            log.debugf("Waiting for job completion jobInstance=%s timeout=%smin", instanceId, timeout);
-            exec.awaitTermination(timeout, TimeUnit.MINUTES);
+            log.debugf("Waiting for job completion jobInstance=%s timeout=%ssec", instanceId, jobTimeout);
+            exec.awaitTermination(jobTimeout, TimeUnit.SECONDS);
 
             int count = Integer.parseInt(exec.getExitStatus());
             postsCount = postsCount + count;
