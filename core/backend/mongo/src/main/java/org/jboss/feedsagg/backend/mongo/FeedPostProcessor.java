@@ -38,7 +38,9 @@ public class FeedPostProcessor implements ItemProcessor {
     }
     public static Document validateAndConvert(SyndEntry post, String feed, String group, String defaultAuthor) throws PostValidationException {
         Document document = new Document("feed", feed);
-        document.append("group", group);
+        if (StringUtils.isNotBlank(group)) {
+            document.append("group", group);
+        }
 
         String link = normalizeString(post.getLink());
         if (StringUtils.isBlank(link)) {
