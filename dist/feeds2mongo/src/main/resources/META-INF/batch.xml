@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<batch-artifacts xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/batchXML_1_0.xsd">
+    <ref id="feedReader" class="org.jboss.feedsagg.feedreader.FeedReader"/>
+    <ref id="feedPostProcessor" class="org.jboss.feedsagg.backend.mongo.FeedPostProcessor"/>
+    <ref id="feedMongoWriter" class="org.jboss.feedsagg.backend.mongo.FeedMongoWriter"/>
+
+    <ref id="allFeedsConfigReader" class="org.jboss.feedsagg.config.AllFeedsConfigReader"/>
+    <ref id="allFeedsWriter" class="org.jboss.feedsagg.config.AllFeedsWriter"/>
+
+    <ref id="loggingJobListener" class="org.jboss.feedsagg.common.LoggingJobListener" />
+    <ref id="setupMongoListener" class="org.jboss.feedsagg.backend.mongo.SetupMongoListener"/>
+    <ref id="loggingSkipListener" class="org.jboss.feedsagg.common.LoggingSkipListener"/>
+</batch-artifacts>

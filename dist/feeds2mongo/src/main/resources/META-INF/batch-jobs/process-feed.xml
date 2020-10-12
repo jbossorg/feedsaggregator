@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="process-feed" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd"
+     version="1.0">
+    <!--
+        Job process individual RSS/ATOM feed.
+        Required input job properties:
+            1. `url` - URL of the feed to index
+            2. `feed` - code of the feed
+            3. `group` - group code of the feed (Optional)
+            4. `mongoUrl` - Mongo URL
+            5. `db` - DB Name
+            6. `collection` - Collection name
+    -->
+    <listeners>
+        <listener ref="loggingJobListener"/>
+        <listener ref="setupMongoListener"/>
+    </listeners>
+    <step id="processFeed">
+        <listeners>
+            <listener ref="loggingSkipListener" />
+        </listeners>
+        <chunk retry-limit="3">
+            <reader ref="feedReader"/>
+            <processor ref="feedPostProcessor"/>
+            <writer ref="feedMongoWriter"/>
+            <skippable-exception-classes>
+                <include class="org.jboss.feedsagg.common.PostValidationException"/>
+            </skippable-exception-classes>
+            <retryable-exception-classes>
+                <include class="java.net.SocketTimeoutException"/>
+                <include class="java.net.UnknownHostException"/>
+            </retryable-exception-classes>
+        </chunk>
+    </step>
+</job>
