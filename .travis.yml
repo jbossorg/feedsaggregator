@@ -1,8 +1,0 @@
-language: java
-
-script: mvn test -B -Pconfig-test-included
-
-# cache the build tool's caches
-cache:
-  directories:
-    - $HOME/.m2

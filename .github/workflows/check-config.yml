@@ -1,4 +1,4 @@
-name: Check Config
+name: Build and Check Config
 
 on:
   pull_request:
