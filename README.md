@@ -1,6 +1,6 @@
 # Feeds Aggregator
 
-![Java CI with Maven](https://github.com/jbossorg/feedsaggregator/workflows/Java%20CI%20with%20Maven/badge.svg)
+[![GitHub Actions Status](<https://img.shields.io/github/workflow/status/jbossorg/feedsaggregator/Java CI with Maven?logo=GitHub&style=for-the-badge>)](https://github.com/jbossorg/feedsaggregator/actions?query=workflow%3A%22Java+CI+with+Maven%22)
 [![License](https://img.shields.io/github/license/jbossorg/feedsaggregator?style=for-the-badge&logo=apache)](https://www.apache.org/licenses/LICENSE-2.0)
 
 Powerful and modular Java RSS/ATOM feeds aggregator and indexer.
