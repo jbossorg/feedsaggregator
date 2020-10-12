@@ -9,9 +9,9 @@
     <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <description>A simple standalone Java batch-processing application fetching RSS/ATOM feeds and storing to MongoDB</description>
+    <description>Powerful and modular Java RSS/ATOM feeds aggregator and indexer</description>
 
-    <url>https://github.com/lkrzyzanek/feeds2mongo.git</url>
+    <url>https://github.com/jbossorg/feedsaggregator.git</url>
     <licenses>
         <license>
             <name>Apache License 2.0</name>
@@ -20,9 +20,18 @@
         </license>
     </licenses>
 
+    <scm>
+        <connection>scm:git:https://github.com/jbossorg/feedsaggregator.git</connection>
+        <developerConnection>scm:git:git@github.com:jbossorg/feedsaggregator.git</developerConnection>
+        <url>https://github.com/jbossorg/feedsaggregator.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <properties>
         <version.org.jberet>1.4.0.Final</version.org.jberet>
         <version.com.rometools>1.15.0</version.com.rometools>
+
+        <release.goal>deploy</release.goal>
     </properties>
 
     <modules>
@@ -39,6 +48,24 @@
                 <version>3.8.0</version>
                 <configuration>
                     <release>11</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <goals>${release.goal}</goals>
                 </configuration>
             </plugin>
         </plugins>
