@@ -7,6 +7,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import javax.batch.api.BatchProperty;
 import javax.batch.api.chunk.ItemWriter;
 import javax.batch.operations.BatchRuntimeException;
 import javax.batch.operations.JobOperator;
@@ -26,6 +27,10 @@ public class AllFeedsWriter implements ItemWriter {
 
     @Inject
     JobContext jobContext;
+
+    @Inject
+    @BatchProperty(name = "PROCESS_JOB_NAME")
+    String jobName = "process-feed.xml";
 
     final JobOperator jobOperator = BatchRuntime.getJobOperator();
 
@@ -59,7 +64,8 @@ public class AllFeedsWriter implements ItemWriter {
             }
             // Skip DB Init. Covered by parent job.
             prop.setProperty("SKIP_DB_INIT", "true");
-            long executionId = jobOperator.start("process-feed.xml", prop);
+
+            long executionId = jobOperator.start(jobName, prop);
             executions.add(executionId);
             log.infof("JOB_EXECUTION status=SCHEDULED. index=%s job_execution_id=%s, feed=%s", index, executionId, feedConfig);
         }

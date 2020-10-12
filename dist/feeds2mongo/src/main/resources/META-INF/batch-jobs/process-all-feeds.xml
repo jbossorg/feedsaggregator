@@ -23,7 +23,12 @@
         <!-- The item-count defined how many feeds resp. jobs should be triggered at once -->
         <chunk item-count="20">
             <reader ref="allFeedsConfigReader"/>
-            <writer ref="allFeedsWriter"/>
+            <writer ref="allFeedsWriter">
+                <properties>
+                    <!-- Optional property defining the name of job to trigger. Default is process-feed.xml -->
+                    <property name="PROCESS_JOB_NAME" value="process-feed.xml"/>
+                </properties>
+            </writer>
         </chunk>
     </step>
 </job>

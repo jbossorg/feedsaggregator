@@ -31,10 +31,6 @@ public class FeedReader implements ItemReader {
 
     XmlReader reader;
 
-    String feedUrl;
-
-    String feedCode;
-
     protected SyndFeed feed;
 
     List<SyndEntry> entries;
@@ -45,18 +41,19 @@ public class FeedReader implements ItemReader {
     public void open(final Serializable checkpoint) throws Exception {
         Properties jobProperties = JobUtils.getJobParameter(jobContext);
 
-        feedUrl = jobProperties.getProperty("url");
+        String feedUrl = jobProperties.getProperty("url");
         if (feedUrl == null) {
             throw new BatchRuntimeException("job parameter `url` must be defined");
         }
-
-        feedCode = jobProperties.getProperty("feed");
+        int connectTimeoutMs = Integer.parseInt(jobProperties.getProperty("connectTimeout", "5")) * 1000;
+        int readTimeoutMs = Integer.parseInt(jobProperties.getProperty("readTimeoutMs", "15")) * 1000;
+        String userAgent = jobProperties.getProperty("userAgent", USER_AGENT);
 
         SyndFeedInput input = new SyndFeedInput();
         if (feedUrl.startsWith("/")) {
             reader = new XmlReader(FeedReader.class.getResourceAsStream(feedUrl));
         } else {
-            reader = new XmlReader(getConnection(feedUrl).getInputStream());
+            reader = new XmlReader(getConnection(feedUrl, connectTimeoutMs, readTimeoutMs, userAgent).getInputStream());
         }
         try {
             feed = input.build(reader);
@@ -72,11 +69,11 @@ public class FeedReader implements ItemReader {
         }
     }
 
-    protected URLConnection getConnection(String link) throws IOException {
+    protected URLConnection getConnection(String link, int connectTimeoutMs, int readTimeoutMs, String userAgent) throws IOException {
         URLConnection conn = new URL(link).openConnection();
-        conn.setReadTimeout(15000);   //15 sec
-        conn.setConnectTimeout(5000); //5 sec
-        conn.setRequestProperty("User-Agent", USER_AGENT);
+        conn.setConnectTimeout(connectTimeoutMs);
+        conn.setReadTimeout(readTimeoutMs);
+        conn.setRequestProperty("User-Agent", userAgent);
         conn.connect();
 
         return conn;
