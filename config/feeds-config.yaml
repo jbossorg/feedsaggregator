@@ -16,6 +16,9 @@
 # planet.jboss.org configuration
 
 - aerogear:
+    - code: aerogear
+      url: https://aerogear.org/feed.atom
+      author: 'AeroGear'
     - code: corinnekrych
       title: 'chat & code'
       url: http://corinnekrych.blogspot.com/feeds/posts/default?alt=rss
