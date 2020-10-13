@@ -21,12 +21,4 @@ The project ships also ready to go [distributions](dist) which can be used as we
 
 ## Distributions
 
-1. [feeds2mongo](dist/feeds2mongo) - indexer with mongo backend.
-
-## How to build
-
-Simply run maven - it produces core components as well as builds distributions
-
-```
-mvn clean package
-```
+1. [feeds2mongo](dist/feeds2mongo) - indexer with mongo backend. Download [here](https://github.com/jbossorg/feedsaggregator/packages/439303/versions).

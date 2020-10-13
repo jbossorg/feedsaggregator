@@ -2,6 +2,14 @@
 
 Feel free to create an issue, or a pull request.
 
+## How to build
+
+Simply run maven - it produces core components as well as builds distributions
+
+```
+mvn clean package
+```
+
 ## Release process
 
 1. Perform maven release by 

@@ -1,6 +1,6 @@
 # Feeds Aggregator Distribution: feeds2mongo
 
-The distribution pack core components and use mongo as backend.
+The distribution packs core components and use mongo as backend.
 
 ## Jobs
 
@@ -31,6 +31,9 @@ Configuration:
 ## Deployment
 
 ### How to run locally
+
+Build the project or download the latest version as one jar file can be downloaded 
+from [github packages](https://github.com/jbossorg/feedsaggregator/packages/439303/versions).
 
 1. Start mongo
 
