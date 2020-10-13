@@ -9,5 +9,6 @@
     </parent>
 
     <artifactId>common</artifactId>
+    <description>Common logic</description>
 
 </project>

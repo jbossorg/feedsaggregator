@@ -10,6 +10,7 @@
 
     <groupId>org.jboss.feedsaggregator.dist</groupId>
     <artifactId>feeds2mongo</artifactId>
+    <description>Feeds Aggregator Distribution with Mongo DB backend</description>
 
     <properties>
         <version.mongo.flapdoodle>2.2.0</version.mongo.flapdoodle>

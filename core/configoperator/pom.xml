@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>configoperator</artifactId>
+    <description>Configuration parser and feed jobs trigger</description>
 
     <dependencies>
         <dependency>

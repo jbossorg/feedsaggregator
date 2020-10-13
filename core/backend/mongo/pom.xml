@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>mongo</artifactId>
+    <description>Mongo backend</description>
 
     <properties>
         <version.mongodb.driver>3.12.7</version.mongodb.driver>
