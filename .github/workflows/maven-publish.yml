@@ -4,8 +4,9 @@
 name: Deploy Maven Package
 
 on:
-  release:
-    types: [created]
+  create:
+    tags:
+      - *
 
 jobs:
   build:
