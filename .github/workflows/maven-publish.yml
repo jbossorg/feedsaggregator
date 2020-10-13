@@ -4,7 +4,7 @@
 name: Deploy Maven Package
 
 on:
-  create:
+  push:
     tags:
       - *
 
