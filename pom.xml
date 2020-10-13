@@ -28,8 +28,8 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>GitHub jbossorg Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/jbossorg</url>
+            <name>GitHub jbossorg Apache Maven Releases</name>
+            <url>https://maven.pkg.github.com/jbossorg/releases</url>
         </repository>
     </distributionManagement>
 
