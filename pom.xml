@@ -25,6 +25,14 @@
         <tag>HEAD</tag>
     </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub jbossorg Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/jbossorg</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <version.org.jberet>1.4.0.Final</version.org.jberet>
         <version.com.rometools>1.15.0</version.com.rometools>
