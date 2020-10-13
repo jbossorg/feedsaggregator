@@ -29,7 +29,7 @@
         <repository>
             <id>github</id>
             <name>GitHub jbossorg Apache Maven Releases</name>
-            <url>https://maven.pkg.github.com/jbossorg/releases</url>
+            <url>https://maven.pkg.github.com/jbossorg/feedsaggregator</url>
         </repository>
     </distributionManagement>
 
