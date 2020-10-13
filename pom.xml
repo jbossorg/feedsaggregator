@@ -31,7 +31,8 @@
         <version.org.jberet>1.4.0.Final</version.org.jberet>
         <version.com.rometools>1.15.0</version.com.rometools>
 
-        <release.goal>deploy</release.goal>
+        <!-- By default just do maven install and let github to do the deploy on release -->
+        <release.goal>install</release.goal>
     </properties>
 
     <modules>
