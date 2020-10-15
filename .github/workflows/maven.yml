@@ -6,8 +6,9 @@ name: Java CI with Maven
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+# Do not run on pull requests - covered by "check-config.yml"
+#  pull_request:
+#    branches: [ main ]
 
 jobs:
   build:
