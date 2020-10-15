@@ -39,11 +39,14 @@
 
         <!-- By default just do maven install and let github to do the deploy on release -->
         <release.goal>install</release.goal>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <modules>
         <module>core</module>
         <module>dist</module>
+        <module>rest</module>
     </modules>
 
     <build>
