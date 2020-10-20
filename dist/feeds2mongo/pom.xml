@@ -16,6 +16,8 @@
         <version.mongo.flapdoodle>2.2.0</version.mongo.flapdoodle>
         <version.mongodb.driver>3.12.7</version.mongodb.driver>
 
+        <main.class>org.jberet.se.Main</main.class>
+
         <config.url>${project.baseUri}/../../config/feeds-config.yaml</config.url>
     </properties>
 
@@ -58,17 +60,15 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${main.class}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -83,6 +83,81 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>uberjar</id>
+            <activation>
+                <property>
+                    <name>uberjar</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <skipITs>true</skipITs>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                    <resource>META-INF/</resource>
+                                    <file>batch.xml</file>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>container-deploy</id>
+            <activation>
+                <property>
+                    <name>container-deploy</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>2.6.0</version>
+                        <configuration>
+                            <from>
+                                <image>${build.jib.base-jvm-image}</image>
+                            </from>
+                            <allowInsecureRegistries>${jib.allowInsecureRegistries}</allowInsecureRegistries>
+                            <to>
+                                <image>${build.container-image.registry}/${build.container-image.group}/${project.build.finalName}:${build.container-image.tag}</image>
+                            </to>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
         <profile>
             <id>config-test-included</id>
             <build>
