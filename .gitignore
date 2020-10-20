@@ -28,3 +28,8 @@ hs_err_pid*
 *.iml
 
 dependency-reduced-pom.xml
+
+# Eclipse project files
+.project
+.classpath
+.settings/
