@@ -1,12 +1,10 @@
 package org.jboss.feedsagg.config;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import javax.batch.api.chunk.ItemReader;
 import javax.batch.operations.BatchRuntimeException;
@@ -27,19 +25,23 @@ public class AllFeedsConfigReader implements ItemReader {
 
     private int index;
 
-    public static List<FeedConfig> getConfig(InputStream is) {
+    public static List<FeedConfig> getConfig(InputStream is) throws IOException, FeedsConfigException {
         Yaml config = new Yaml();
         List<Map<String, List<Map>>> confs = config.load(is);
 
-        List<FeedConfig> allFeeds = new ArrayList<>();
+        Set<FeedConfig> uniqueConfigs = new HashSet<>();
         for (Map<String, List<Map>> group : confs) {
-            group.forEach((key, value) -> {
-                for (Map feed : value) {
-                    allFeeds.add(new FeedConfig(key, (String) feed.get("code"), (String) feed.get("url"), (String) feed.get("author")));
+            for (Map.Entry<String, List<Map>> groupEntry : group.entrySet()) {
+                for (Map feed : groupEntry.getValue()) {
+                    FeedConfig c = new FeedConfig(groupEntry.getKey(), (String) feed.get("code"), (String) feed.get("url"), (String) feed.get("author"));
+                    boolean added = uniqueConfigs.add(c);
+                    if (!added) {
+                        throw new FeedsConfigException("duplicate feed configuration", c);
+                    }
                 }
-            });
+            }
         }
-        return allFeeds;
+        return new ArrayList<>(uniqueConfigs);
     }
 
     @Override
@@ -51,9 +53,9 @@ public class AllFeedsConfigReader implements ItemReader {
             throw new BatchRuntimeException("job parameter `configUrl` must be defined");
         }
 
-        InputStream is = new URL(configUrl).openStream();
-        feeds = getConfig(is);
-        is.close();
+        try (InputStream is = new URL(configUrl).openStream()) {
+            feeds = getConfig(is);
+        }
 
         if (checkpoint != null) {
             index = (Integer) checkpoint;
