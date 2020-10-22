@@ -1,0 +1,6 @@
+# test configuration file - duplicite feed URLs
+- test-group:
+  - code: test1
+    url: /test-feed.xml
+  - code: test2
+    url: /test-feed.xml

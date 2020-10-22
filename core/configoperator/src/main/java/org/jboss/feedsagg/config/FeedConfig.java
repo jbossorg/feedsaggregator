@@ -1,5 +1,7 @@
 package org.jboss.feedsagg.config;
 
+import java.util.Objects;
+
 /**
  * Model class for feed configuration
  */
@@ -61,5 +63,20 @@ public class FeedConfig {
         sb.append(", author='").append(author).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        FeedConfig that = (FeedConfig) o;
+        return url.equals(that.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(url);
     }
 }

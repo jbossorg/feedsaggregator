@@ -171,9 +171,6 @@
     - code: koentsje
       title: 'Script for a Jester''s Tear'
       url: http://koentsje.blogspot.com/feeds/posts/default?alt=rss
-    - code: bdaw_jbug
-      title: 'Some letters and numbers'
-      url: http://bdawidowicz.blogspot.com/feeds/posts/default
 - hibernate:
     - code: no_relation_to
       title: 'No Relation To - jboss'
@@ -228,10 +225,6 @@
     - code: swiderskimaciej
       title: 'Accelerate your business'
       url: http://mswiderski.blogspot.com/feeds/posts/default
-- jbossmarshalling:
-    - code: dmlloyd_mar
-      title: 'David M. Lloyd'
-      url: http://dmlloyd.blogspot.com/feeds/posts/default
 - jbossmc:
     - code: flaviarainone
       title: 'Flavia Rainone''s Blog'
@@ -398,7 +391,3 @@
     - code: jucook
       title: 'Justin''s WildFly Blog'
       url: https://justinwildfly.blogspot.com/feeds/posts/default?alt=rss
-- xnio:
-    - code: dmlloyd_io
-      title: 'David M. Lloyd'
-      url: http://dmlloyd.blogspot.com/feeds/posts/default?category=i/o
