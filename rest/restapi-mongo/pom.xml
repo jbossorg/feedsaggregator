@@ -96,7 +96,6 @@
                 <configuration>
                     <systemPropertyVariables>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                        <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -104,11 +103,39 @@
     </build>
     <profiles>
         <profile>
-            <id>deploy</id>
+            <id>uberjar</id>
+            <activation>
+                <property>
+                    <name>uberjar</name>
+                </property>
+            </activation>
             <properties>
                 <!-- During deployment build uber jar -->
                 <quarkus.build.uberJar>true</quarkus.build.uberJar>
             </properties>
+        </profile>
+        <profile>
+            <id>container-deploy</id>
+            <activation>
+                <property>
+                    <name>container-deploy</name>
+                </property>
+            </activation>
+            <properties>
+                <quarkus.container-image.build>true</quarkus.container-image.build>
+                <quarkus.container-image.push>true</quarkus.container-image.push>
+                <quarkus.jib.base-jvm-image>${build.jib.base-jvm-image}</quarkus.jib.base-jvm-image>
+                <quarkus.container-image.group>${build.container-image.group}</quarkus.container-image.group>
+                <quarkus.container-image.tag>${build.container-image.tag}</quarkus.container-image.tag>
+                <quarkus.container-image.insecure>${jib.allowInsecureRegistries}</quarkus.container-image.insecure>
+                <quarkus.container-image.registry>${build.container-image.registry}</quarkus.container-image.registry>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-container-image-jib</artifactId>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
             <id>native</id>
@@ -132,7 +159,6 @@
                                     <systemPropertyVariables>
                                         <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
                                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                                        <maven.home>${maven.home}</maven.home>
                                     </systemPropertyVariables>
                                 </configuration>
                             </execution>

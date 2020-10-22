@@ -41,6 +41,12 @@
         <release.goal>install</release.goal>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <build.jib.base-jvm-image>registry.access.redhat.com/ubi8/openjdk-11</build.jib.base-jvm-image>
+        <build.container-image.registry>example.com</build.container-image.registry>
+        <build.container-image.group>feedsaggregator</build.container-image.group>
+        <build.container-image.tag>${project.version}</build.container-image.tag>
+        <jib.allowInsecureRegistries>true</jib.allowInsecureRegistries>
     </properties>
 
     <modules>
@@ -51,6 +57,15 @@
 
     <build>
         <finalName>${project.name}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

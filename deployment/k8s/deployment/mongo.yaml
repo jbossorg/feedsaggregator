@@ -1,0 +1,59 @@
+apiVersion: v1
+data:
+  # echo -n 'root' | base64
+  MONGO_INITDB_ROOT_USERNAME: cm9vdA==
+  # echo -n 'password' | base64
+  MONGO_INITDB_ROOT_PASSWORD: cGFzc3dvcmQ=
+kind: Secret
+metadata:
+  name: mongodb-secrets
+type: Opaque
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: mongo
+  name: mongo
+spec:
+  serviceName: mongo
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: MONGO_INITDB_ROOT_PASSWORD
+          image: mongo
+          name: mongo
+          ports:
+            - containerPort: 27017
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mongo
+  name: mongo
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  clusterIP: None
+  selector:
+    app: mongo

@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: feedsagg-shared-workspace
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: feedsagg-build-pipeline-run
+spec:
+  pipelineRef:
+    name: feedsagg-build-pipeline
+  params:
+    - name: gitUrl
+      value: 'https://github.com/jbossorg/feedsaggregator.git'
+    - name: gitRevision
+      value: 'main'
+    - name: imageTag
+      value: 'latest'
+    - name: imageRegistry
+      value: 'example.com'
+    - name: insecureRegistry
+      value: 'true'
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: feedsagg-shared-workspace
+    - name: maven-settings
+      emptyDir: {}

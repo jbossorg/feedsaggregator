@@ -25,3 +25,7 @@ The project ships also ready to go [distributions](dist) which can be used as we
 
 ### REST API
 1. [restapi-mongo](rest/restapi-mongo) - REST API backed by mongo DB.
+
+## Deployment
+
+1. [Kubernetes](deployment/k8s)

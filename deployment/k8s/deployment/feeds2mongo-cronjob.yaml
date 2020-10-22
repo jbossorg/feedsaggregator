@@ -1,0 +1,47 @@
+apiVersion: v1
+data:
+  # echo -n 'mongodb://root:password@mongo:27017' | base64
+  MONGODB_CONNECTION_STRING: bW9uZ29kYjovL3Jvb3Q6cGFzc3dvcmRAbW9uZ286MjcwMTc=
+kind: Secret
+metadata:
+  name: feeds2mongo-secrets
+type: Opaque
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: feeds2mongo
+spec:
+  schedule: "*/10 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: feedsaggregator
+            tier: feeds2mongo
+        spec:
+          containers:
+            - name: feeds2mongo
+              image: example.com/feedsaggregator/feeds2mongo
+              args:
+                - process-all-feeds.xml
+                - configUrl=file:///app/config/feeds-config.yaml
+                - mongoUrl=$(MONGODB_CONNECTION_STRING)
+                - db=feeds2mongo
+                - collection=posts
+              env:
+                - name: MONGODB_CONNECTION_STRING
+                  valueFrom:
+                    secretKeyRef:
+                      name: feeds2mongo-secrets
+                      key: MONGODB_CONNECTION_STRING
+              volumeMounts:
+                - name: config-volume
+                  mountPath: /app/config
+          volumes:
+            - name: config-volume
+              configMap:
+                name: feeds2mongo-feedsconfig
+          restartPolicy: OnFailure
