@@ -26,6 +26,6 @@ jobs:
       run: mvn -B -Duberjar install --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -Duberjar -s $GITHUB_WORKSPACE/settings.xml
+      run: mvn deploy -Duberjar -DskipTests -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
