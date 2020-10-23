@@ -44,7 +44,8 @@
 
         <build.jib.base-jvm-image>registry.access.redhat.com/ubi8/openjdk-11</build.jib.base-jvm-image>
         <build.container-image.registry>example.com</build.container-image.registry>
-        <build.container-image.group>feedsaggregator</build.container-image.group>
+        <build.container-image.group>jbossorg</build.container-image.group>
+        <build.container-image.name-prefix>feedsaggregator_</build.container-image.name-prefix>
         <build.container-image.tag>${project.version}</build.container-image.tag>
         <jib.allowInsecureRegistries>true</jib.allowInsecureRegistries>
     </properties>
@@ -66,7 +67,6 @@
     </dependencyManagement>
 
     <build>
-        <finalName>${project.name}</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>

@@ -57,6 +57,7 @@ spec:
             - -DskipTests
             - -Dbuild.jib.base-jvm-image=$(params.baseImage)
             - -Dbuild.container-image.group=$(params.imageGroup)
+            - -Dbuild.container-image.name-prefix=
             - -Dbuild.container-image.tag=$(params.imageTag)
             - -Djib.allowInsecureRegistries=$(params.insecureRegistry)
             - -Dbuild.container-image.registry=$(params.imageRegistry)
