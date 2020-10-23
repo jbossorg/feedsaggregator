@@ -71,6 +71,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>io.quarkus</groupId>
@@ -125,6 +126,7 @@
                 <quarkus.container-image.push>true</quarkus.container-image.push>
                 <quarkus.jib.base-jvm-image>${build.jib.base-jvm-image}</quarkus.jib.base-jvm-image>
                 <quarkus.container-image.group>${build.container-image.group}</quarkus.container-image.group>
+                <quarkus.container-image.name>${build.container-image.name-prefix}${project.build.finalName}</quarkus.container-image.name>
                 <quarkus.container-image.tag>${build.container-image.tag}</quarkus.container-image.tag>
                 <quarkus.container-image.insecure>${jib.allowInsecureRegistries}</quarkus.container-image.insecure>
                 <quarkus.container-image.registry>${build.container-image.registry}</quarkus.container-image.registry>

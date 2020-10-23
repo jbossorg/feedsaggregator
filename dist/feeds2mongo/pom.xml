@@ -57,6 +57,7 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -142,7 +143,7 @@
                             </from>
                             <allowInsecureRegistries>${jib.allowInsecureRegistries}</allowInsecureRegistries>
                             <to>
-                                <image>${build.container-image.registry}/${build.container-image.group}/${project.build.finalName}:${build.container-image.tag}</image>
+                                <image>${build.container-image.registry}/${build.container-image.group}/${build.container-image.name-prefix}${project.build.finalName}:${build.container-image.tag}</image>
                             </to>
                         </configuration>
                         <executions>
