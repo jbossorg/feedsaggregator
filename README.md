@@ -21,10 +21,14 @@ The project ships also ready to go [distributions](dist) which can be used as we
 
 ## Distributions
 
-1. [feeds2mongo](dist/feeds2mongo) - indexer with mongo backend. Download [here](https://github.com/jbossorg/feedsaggregator/packages/439303/versions).
+1. [feeds2mongo](dist/feeds2mongo) - indexer with mongo backend.
+* [Standalone java app](https://github.com/jbossorg/feedsaggregator/packages/439303/versions).
+* [Docker](https://hub.docker.com/repository/docker/jbossorg/feedsaggregator_feeds2mongo)
 
 ### REST API
 1. [restapi-mongo](rest/restapi-mongo) - REST API backed by mongo DB.
+* [Standalone java app](https://github.com/jbossorg/feedsaggregator/packages/470473/versions).
+* [Docker](https://hub.docker.com/repository/docker/jbossorg/feedsaggregator_restapi-mongo)
 
 ## Deployment
 
