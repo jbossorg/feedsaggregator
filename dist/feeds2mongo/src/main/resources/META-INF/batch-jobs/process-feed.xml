@@ -20,6 +20,7 @@
     <step id="processFeed">
         <listeners>
             <listener ref="loggingSkipListener" />
+            <listener ref="loggingRetryListener" />
         </listeners>
         <chunk retry-limit="3">
             <reader ref="feedReader"/>
@@ -31,6 +32,8 @@
             <retryable-exception-classes>
                 <include class="java.net.SocketTimeoutException"/>
                 <include class="java.net.UnknownHostException"/>
+
+                <include class="org.jboss.feedsagg.common.RetryItemException"/>
             </retryable-exception-classes>
         </chunk>
     </step>
