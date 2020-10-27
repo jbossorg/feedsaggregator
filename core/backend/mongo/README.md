@@ -21,6 +21,7 @@ Indexes are being automatically created on these fields:
 3. `published`
 4. `feed`
 5. `group`
+6. `tags`
 
 The stored Blog post in Mongo looks like this:
 
@@ -39,9 +40,15 @@ The stored Blog post in Mongo looks like this:
         "quarkus", 
         "kafka"
     ],
-    "content" : "\n                In a previous blog post about Kafka and Avro, we used an emitter to send Kafka messages. In this post, we are going look at this emitter construct a little bit more closely. Injecting an Emitter Injecting an emitter is straightforward. You indicate the targeted channel, i.e., where do you...\n            "
+    "content_preview" : "In a previous blog post about Kafka and Avro, we used an emitter to send Kafka messages...",
+    "content" : "\n                In a previous blog post about <a href='www.kafka.io'>Kafka</a> and Avro, we used an emitter to send Kafka messages. In this post, we are going look at this emitter construct a little bit more closely. Injecting an Emitter Injecting an emitter is straightforward. You indicate the targeted channel, i.e., where do you...\n            "
 }
 ```
+
+Notes:
+* `content` field can be long and can contain html formating from tje original blogpost
+* `content_preview` is content cleaned not to contain html formating and shortened so it can be used as an preview
+
 ## Job Example Usage
 
 See [feeds2mongo example](../../../dist/feeds2mongo/src/main/resources/META-INF/batch-jobs/process-feed.xml)

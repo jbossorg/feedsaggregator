@@ -34,6 +34,7 @@ public class SetupMongoListener implements JobListener {
     public static final String INDEX_PUBLISHED = "_published_";
     public static final String INDEX_FEED = "_feed_";
     public static final String INDEX_GROUP = "_group_";
+    public static final String INDEX_TAGS = "_tags_";
 
     @Override
     public void beforeJob() throws Exception {
@@ -58,6 +59,7 @@ public class SetupMongoListener implements JobListener {
         boolean createPublishedIndex = true;
         boolean createFeedIndex = true;
         boolean createGroupIndex = true;
+        boolean createTagsIndex = true;
         for (Document index : collection.listIndexes()) {
             log.debugf("index: %s", index);
             String idxName = index.get("name").toString();
@@ -76,6 +78,9 @@ public class SetupMongoListener implements JobListener {
                 break;
             case INDEX_GROUP:
                 createGroupIndex = false;
+                break;
+            case INDEX_TAGS:
+                createTagsIndex = false;
                 break;
             }
         }
@@ -100,6 +105,10 @@ public class SetupMongoListener implements JobListener {
         if (createGroupIndex) {
             log.infof("Creating index %s", INDEX_GROUP);
             collection.createIndex(Indexes.descending("group"), new IndexOptions().name(INDEX_GROUP).unique(false));
+        }
+        if (createTagsIndex) {
+            log.infof("Creating index %s", INDEX_TAGS);
+            collection.createIndex(Indexes.descending("tags"), new IndexOptions().name(INDEX_TAGS).unique(false));
         }
     }
 
