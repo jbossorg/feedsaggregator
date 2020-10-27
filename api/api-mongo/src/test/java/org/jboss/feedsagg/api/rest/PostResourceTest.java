@@ -26,10 +26,16 @@ class PostResourceTest {
 
     @Test
     void testGetPost() {
-        given().when().get("/rest/v1/post/test-id").then()
+        given().when().get("/rest/v1/post/my_test_code").then()
                 .statusCode(200)
                 .body("id", equalTo("test-id"))
-                .body("code", equalTo("test-code"));
+                .body("code", equalTo("my_test_code"));
+    }
+    
+    @Test
+    void testGetPost_unknown() {
+        given().when().get("/rest/v1/unknown").then()
+                .statusCode(404);
     }
 
 }

@@ -18,7 +18,17 @@ class SearchResourceTest {
     void testSearch() {
         BlogPost[] posts = given().when().get("/rest/v1/search").then().statusCode(200).extract().as(BlogPost[].class);
         Assertions.assertEquals(1, posts.length);
-        Assertions.assertEquals("test-id1", posts[0].getId());
+        // id is not published over the API!
+        Assertions.assertNull(posts[0].getId());
+        Assertions.assertEquals("Conditions:", posts[0].getContent());
     }
 
+    @Test
+    void testSearch_tags() {
+        BlogPost[] posts = given().when().get("/rest/v1/search?tag=t1&tag=t2").then().statusCode(200).extract().as(BlogPost[].class);
+        Assertions.assertEquals(1, posts.length);
+        // id is not published over the API!
+        Assertions.assertNull(posts[0].getId());
+        Assertions.assertEquals("Conditions: tags: [t1, t2]", posts[0].getContent());
+    }
 }

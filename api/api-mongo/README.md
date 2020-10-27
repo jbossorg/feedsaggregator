@@ -10,9 +10,10 @@ REST API description
   * from=0
   * size=10 - limit of blog posts. Maximum is 100.
   * sort=[asc|desc] (default desc)
-  * feed=feed_name - filter posts only given feed 
-  * group=group_name - filter posts only for given group
-* `/rest/v1/post/{id}` - get post based on its `_id` in mongo
+  * feed=feed_name - filter posts only for given feed, can be used multiple times to mix more feeds
+  * group=group_name - filter posts only for given group, can be used multiple times to mix more groups
+  * tag=tag_value - filter posts only for given tag, can be used multiple times to mix more tags
+* `/rest/v1/post/{code}` - get blog-post based on its `code` field in mongo
 * `/health` - health checks
 * `/health/live` - liveness check
 * `/health/ready` - readiness check. If MongoDB is down the check is down as well.

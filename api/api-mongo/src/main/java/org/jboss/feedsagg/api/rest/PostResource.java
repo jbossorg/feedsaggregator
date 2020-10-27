@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.jboss.feedsagg.api.BlogPostMongoService;
 import org.jboss.feedsagg.api.model.BlogPost;
 
@@ -17,9 +18,10 @@ public class PostResource {
     BlogPostMongoService blogPostMongoService;
 
     @GET
-    @Path("{id}")
-    public Uni<BlogPost> getPost(@PathParam("id") String id) {
-        return blogPostMongoService.getPostById(id).onFailure(IllegalArgumentException.class).transform(failure -> new BadRequestException(failure.getMessage()));
+    @Path("{code}")
+    @Operation(description = "Get one blogpost by it's code")
+    public Uni<BlogPost> getPost(@PathParam("code") String code) {
+        return blogPostMongoService.getPostByCode(code);
     }
 
 }

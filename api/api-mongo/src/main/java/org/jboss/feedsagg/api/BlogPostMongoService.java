@@ -50,27 +50,26 @@ public class BlogPostMongoService {
         p.setPublished(doc.getDate("published"));
         p.setUpdated(doc.getDate("updated"));
         p.setContent(doc.getString("content"));
+        p.setContentPreview(doc.getString("contentPreview"));
         p.setTags(doc.getList("tags", String.class));
 
         return p;
     }
 
     @CacheResult(cacheName = "search")
-    public Uni<List<BlogPost>> search(Integer from, Integer size, String sort, String feed, String group) {
+    public Uni<List<BlogPost>> search(Integer from, Integer size, String sort, List<String> feeds, List<String> groups, List<String> tags) {
         Set<Bson> filters = new HashSet<>();
-        if (StringUtils.isNotBlank(feed)) {
-            filters.add(Filters.eq("feed", feed));
-        }
-        if (StringUtils.isNotBlank(group)) {
-            filters.add(Filters.eq("group", group));
-        }
+        addFilterByListOfValues(filters, "feed", feeds);
+        addFilterByListOfValues(filters, "group", groups);
+        addFilterByListOfValues(filters, "tags", tags);
+
         Bson filter = new Document();
         if (filters.size() > 0) {
             filter = Filters.and(filters);
         }
 
         FindOptions options = new FindOptions();
-        if (size == null) {
+        if (size == null || size < 1) {
             size = 10;
         }
         if (size > 100) {
@@ -91,6 +90,31 @@ public class BlogPostMongoService {
         return getCollection().find(filter, options).map(BlogPostMongoService::convertDocument).collectItems().asList();
     }
 
+    /**
+     * Add filter to select documents containing at least one value from the list of values in the defined field. Values
+     * from the list are sanitized:
+     * <ul>
+     * <li>if list is null or empty then no filter is added
+     * <li>blank value from the list is ignored
+     * </ul>
+     * 
+     * @param filters to add additional condition to - it is expected this is AND filter!
+     * @param fieldName in the document to filter over
+     * @param values to filter by
+     */
+    protected void addFilterByListOfValues(Set<Bson> filters, String fieldName, List<String> values) {
+        if (values != null && values.size() > 0) {
+            Set<Bson> orFilters = new HashSet<>();
+            for (String value : values) {
+                if (StringUtils.isNotBlank(value))
+                    orFilters.add(Filters.eq(fieldName, value));
+            }
+            if (orFilters.size() > 0) {
+                filters.add(Filters.or(orFilters));
+            }
+        }
+    }
+
     @CacheResult(cacheName = "postcache")
     public Uni<BlogPost> getPostById(String id) {
         log.debugf("Get Post, id=%s", id);
@@ -102,6 +126,12 @@ public class BlogPostMongoService {
         } catch (IllegalArgumentException e) {
             return Uni.createFrom().failure(e);
         }
+    }
+
+    @CacheResult(cacheName = "postcache")
+    public Uni<BlogPost> getPostByCode(String code) {
+        log.debugf("Get Post, code=%s", code);
+        return getCollection().find(Filters.eq("code", code)).map(BlogPostMongoService::convertDocument).collectItems().first();
     }
 
     private ReactiveMongoCollection<Document> getCollection() {

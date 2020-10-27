@@ -3,21 +3,40 @@ package org.jboss.feedsagg.api.model;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
 public class BlogPost {
+    
+    @JsonIgnore
     String id;
+    
+    @Schema(description = "ID of the blogpost. Unique id created by this service.")
     String code;
+    @Schema(description = "URL of the blogpost, can be used to view it.")
     String url;
+    @Schema(description = "ID of the feed this blogpost belongs to. It is internal id in this service.")
     String feed;
+    @Schema(description = "Group this blogpost belongs to. Grouping is internal feature of this service to organize feeds a bit.")
     String group;
+    @Schema(description = "Tutle taken from the blogpost.")
     String title;
+    @Schema(description = "Author taken from the blogpost.")
     String author;
+    @Schema(description = "Timestamp when the Blogpost had been published taken from the blogpost.")
     Date published;
+    @Schema(description = "Timestamp when the Blogpost had been updated taken from the blogpost.")
     Date updated;
+    @Schema(description = "Tags taken from the blogpost.")
     List<String> tags;
+    @Schema(description = "Blogpost content containing original html formating. Can be really long.")
     String content;
+    @Schema(description = "Blogpost content cleaned not to contain html formating and shortened so it can be used as an preview.")
+    String contentPreview;
 
     public BlogPost() {
     }
@@ -118,4 +137,13 @@ public class BlogPost {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getContentPreview() {
+        return contentPreview;
+    }
+
+    public void setContentPreview(String contentPreview) {
+        this.contentPreview = contentPreview;
+    }
+
 }

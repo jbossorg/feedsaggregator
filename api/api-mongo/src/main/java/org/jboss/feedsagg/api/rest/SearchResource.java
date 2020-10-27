@@ -18,11 +18,13 @@ import io.smallrye.mutiny.Uni;
 @Produces(MediaType.APPLICATION_JSON)
 public class SearchResource {
 
-    @Inject BlogPostMongoService blogPostMongoService;
+    @Inject
+    BlogPostMongoService blogPostMongoService;
 
     @GET
-    public Uni<List<BlogPost>> search(@QueryParam("from") Integer from, @QueryParam("size") Integer size, @QueryParam("sort") String sort, @QueryParam("feed") String feed, @QueryParam("group") String group) {
-        return blogPostMongoService.search(from, size, sort, feed, group);
+    public Uni<List<BlogPost>> search(@QueryParam("from") Integer from, @QueryParam("size") Integer size, @QueryParam("sort") String sort, @QueryParam("feed") List<String> feeds, @QueryParam("group") List<String> groups,
+            @QueryParam("tag") List<String> tags) {
+        return blogPostMongoService.search(from, size, sort, feeds, groups, tags);
     }
 
 }
