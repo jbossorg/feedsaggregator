@@ -73,6 +73,20 @@
             <artifactId>rest-assured</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Embedded MongoDB for unit tests -->
+		<!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
+		<dependency>
+		  <groupId>de.flapdoodle.embed</groupId>
+		  <artifactId>de.flapdoodle.embed.mongo</artifactId>
+		  <scope>test</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.jboss.feedsaggregator</groupId>
+		  <artifactId>mongo</artifactId>
+		  <version>${version}</version>
+		  <scope>test</scope>
+		</dependency>
+        
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>

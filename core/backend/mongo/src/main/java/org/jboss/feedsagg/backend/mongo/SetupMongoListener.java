@@ -20,7 +20,7 @@ import com.mongodb.client.model.Indexes;
  */
 public class SetupMongoListener implements JobListener {
 
-    private Logger log = Logger.getLogger(SetupMongoListener.class);
+    private static Logger log = Logger.getLogger(SetupMongoListener.class);
 
     @Inject
     JobContext jobContext;
@@ -52,7 +52,7 @@ public class SetupMongoListener implements JobListener {
         }
     }
 
-    protected void initDb(MongoCollection<Document> collection) {
+    public static void initDb(MongoCollection<Document> collection) {
 
         boolean createUrlIndex = true;
         boolean createCodeIndex = true;

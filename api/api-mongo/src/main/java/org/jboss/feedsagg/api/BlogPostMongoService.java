@@ -46,7 +46,6 @@ public class BlogPostMongoService {
         p.setGroup(doc.getString("group"));
         p.setTitle(doc.getString("title"));
         p.setAuthor(doc.getString("author"));
-
         p.setPublished(doc.getDate("published"));
         p.setUpdated(doc.getDate("updated"));
         p.setContent(doc.getString("content"));
@@ -134,7 +133,7 @@ public class BlogPostMongoService {
         return getCollection().find(Filters.eq("code", code)).map(BlogPostMongoService::convertDocument).collectItems().first();
     }
 
-    private ReactiveMongoCollection<Document> getCollection() {
+    protected ReactiveMongoCollection<Document> getCollection() {
         return mongoClient.getDatabase(db).getCollection(collection);
     }
 }

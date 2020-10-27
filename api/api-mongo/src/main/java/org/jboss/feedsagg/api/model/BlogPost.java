@@ -3,6 +3,8 @@ package org.jboss.feedsagg.api.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.json.bind.annotation.JsonbDateFormat;
+
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,9 +29,11 @@ public class BlogPost {
     String title;
     @Schema(description = "Author taken from the blogpost.")
     String author;
-    @Schema(description = "Timestamp when the Blogpost had been published taken from the blogpost.")
+    @Schema(description = "Timestamp when the Blogpost had been published taken from the blogpost. ISO 8601 (yyyy-MM-dd'T'HH:mm:ssZ) format.")
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ssZ")
     Date published;
-    @Schema(description = "Timestamp when the Blogpost had been updated taken from the blogpost.")
+    @Schema(description = "Timestamp when the Blogpost had been updated taken from the blogpost. ISO 8601 (yyyy-MM-dd'T'HH:mm:ssZ) format.")
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ssZ")
     Date updated;
     @Schema(description = "Tags taken from the blogpost.")
     List<String> tags;
