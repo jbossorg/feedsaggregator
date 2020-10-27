@@ -25,10 +25,10 @@ The project ships also ready to go [distributions](dist) which can be used as we
 * [Standalone java app](https://github.com/jbossorg/feedsaggregator/packages/439303/versions).
 * [Docker](https://hub.docker.com/repository/docker/jbossorg/feedsaggregator_feeds2mongo)
 
-### REST API
-1. [restapi-mongo](rest/restapi-mongo) - REST API backed by mongo DB.
+### Service API
+1. [api-mongo](api/api-mongo) - REST API backed by mongo DB.
 * [Standalone java app](https://github.com/jbossorg/feedsaggregator/packages/470473/versions).
-* [Docker](https://hub.docker.com/repository/docker/jbossorg/feedsaggregator_restapi-mongo)
+* [Docker](https://hub.docker.com/repository/docker/jbossorg/feedsaggregator_api-mongo)
 
 ## Deployment
 

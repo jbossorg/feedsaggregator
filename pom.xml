@@ -53,7 +53,7 @@
     <modules>
         <module>core</module>
         <module>dist</module>
-        <module>rest</module>
+        <module>api</module>
     </modules>
 
     <dependencyManagement>
