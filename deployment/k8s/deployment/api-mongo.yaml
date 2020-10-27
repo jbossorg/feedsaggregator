@@ -4,16 +4,16 @@ data:
   QUARKUS_MONGODB_CONNECTION_STRING: bW9uZ29kYjovL3Jvb3Q6cGFzc3dvcmRAbW9uZ286MjcwMTc=
 kind: Secret
 metadata:
-  name: restapi-secrets
+  name: api-mongo-secrets
 type: Opaque
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: restapi
+  name: api-mongo
   labels:
     app: feedsaggregator
-    tier: restapi
+    tier: api-mongo
 spec:
   # comment or delete the following line if you want to use a LoadBalancer
   type: NodePort
@@ -24,27 +24,27 @@ spec:
     - port: 8080
   selector:
     app: feedsaggregator
-    tier: restapi
+    tier: api-mongo
 ---
 apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
-  name: restapi
+  name: api-mongo
 spec:
   selector:
     matchLabels:
       app: feedsaggregator
-      tier: restapi
+      tier: api-mongo
   replicas: 2
   template:
     metadata:
       labels:
         app: feedsaggregator
-        tier: restapi
+        tier: api-mongo
     spec:
       containers:
-        - name: restapi-mongo
-          image: example.com/feedsaggregator/restapi-mongo
+        - name: api-mongo
+          image: example.com/feedsaggregator/api-mongo
           livenessProbe:
             httpGet:
               path: /health/live
@@ -65,7 +65,7 @@ spec:
             - name: QUARKUS_MONGODB_CONNECTION_STRING
               valueFrom:
                 secretKeyRef:
-                  name: restapi-secrets
+                  name: api-mongo-secrets
                   key: QUARKUS_MONGODB_CONNECTION_STRING
           ports:
             - containerPort: 8080

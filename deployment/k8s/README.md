@@ -65,7 +65,9 @@ Run build pipeline:
 kubectl apply -f deployment/k8s/pipeline/build-pipeline-run.yaml
 ```
 
-Wait till pods completed `kubectl get pods --watch`
+Wait till pods completed `kubectl get pods --watch` resp. watch the task by `kubectl logs feedsagg-build-pipeline-run-build-push-image-rn86n-pod-qwp5l step-mvn-goals`.
+
+Note. To rerun it's needed to delete the latest run by `kubectl delete pipelineruns.tekton.dev feedsagg-build-pipeline-run`.
 
 ## Deploy
 
@@ -76,11 +78,11 @@ kubectl apply -f deployment/k8s/deployment/mongo.yaml
 
 2. REST API
 ```
-kubectl apply -f deployment/k8s/deployment/restapi.yaml
+kubectl apply -f deployment/k8s/deployment/api-mongo.yaml
 ```
 and tunnel the service
 ```
-minikube service restapi
+minikube service api-mongo
 ```
 
 3. Feeds2Mongo Cron Job
