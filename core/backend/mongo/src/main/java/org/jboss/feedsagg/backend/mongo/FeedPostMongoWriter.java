@@ -10,8 +10,10 @@ import javax.batch.runtime.context.JobContext;
 import javax.inject.Inject;
 
 import org.bson.Document;
+import org.jboss.feedsagg.common.RetryItemException;
 import org.jboss.logging.Logger;
 
+import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -30,7 +32,7 @@ public class FeedPostMongoWriter implements ItemWriter {
     private MongoCollection<Document> collection = null;
 
     private Object feed;
-    private int count;
+    private int rowNumber;
 
     @Override
     public void open(Serializable checkpoint) throws Exception {
@@ -39,7 +41,12 @@ public class FeedPostMongoWriter implements ItemWriter {
 
         MongoClient client = FeedPostMongoWriter.getClient(jobProperties);
         collection = getCollection(client, jobProperties);
-        count = 0;
+
+        if (checkpoint != null) {
+            rowNumber = (Integer) checkpoint;
+        } else {
+            rowNumber = 0;
+        }
     }
 
     public static MongoClient getClient(Properties jobProperties) {
@@ -64,28 +71,31 @@ public class FeedPostMongoWriter implements ItemWriter {
 
     @Override
     public void close() throws Exception {
-        jobContext.setExitStatus("" + count);
+        jobContext.setExitStatus("" + rowNumber);
     }
 
     @Override
     public void writeItems(List<Object> items) throws Exception {
         final FindOneAndReplaceOptions replaceOptions = new FindOneAndReplaceOptions().upsert(true);
 
-        for (Object item : items) {
-            Document doc = (Document) item;
+        for (; rowNumber < items.size(); rowNumber++) {
+            Document doc = (Document) items.get(rowNumber);
             Object postUrl = doc.get("url");
             this.feed = doc.get("feed");
             log.tracef("Blog data: %s", doc);
 
-            collection.findOneAndReplace(Filters.eq("url", postUrl), doc, replaceOptions);
+            try {
+                collection.findOneAndReplace(Filters.eq("url", postUrl), doc, replaceOptions);
+            } catch (MongoException e) {
+                throw new RetryItemException("Cannot store blogpost", e, postUrl);
+            }
 
             log.infof("POST_PROCESS status=STORED, url=%s", postUrl);
-            count++;
         }
     }
 
     @Override
     public Serializable checkpointInfo() throws Exception {
-        return null;
+        return rowNumber;
     }
 }

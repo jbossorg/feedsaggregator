@@ -13,4 +13,5 @@
     <ref id="loggingJobListener" class="org.jboss.feedsagg.common.LoggingJobListener" />
     <ref id="setupMongoListener" class="org.jboss.feedsagg.backend.mongo.SetupMongoListener"/>
     <ref id="loggingSkipListener" class="org.jboss.feedsagg.common.LoggingSkipListener"/>
+    <ref id="loggingRetryListener" class="org.jboss.feedsagg.common.LoggingRetryListener"/>
 </batch-artifacts>
