@@ -14,11 +14,12 @@ public class FeedPostMongoProcessorTest {
 
     @Test
     public void testConvertTitleToCode() {
-        Assert.assertEquals("one_two", FeedPostMongoProcessor.title2Code("One Two"));
-        Assert.assertEquals("one_two", FeedPostMongoProcessor.title2Code("    One    Two   "));
-        Assert.assertEquals("one_two", FeedPostMongoProcessor.title2Code("One_Two"));
-        Assert.assertEquals("one_two", FeedPostMongoProcessor.title2Code("_One Two_"));
-        Assert.assertEquals("one_two", FeedPostMongoProcessor.title2Code("One  ___ Two"));
+        Assert.assertEquals("feed-one_two", FeedPostMongoProcessor.title2Code("Feed", "One Two"));
+        Assert.assertEquals("feed-one_two", FeedPostMongoProcessor.title2Code("  Feed ","    One    Two   "));
+        Assert.assertEquals("feed_name-one_two", FeedPostMongoProcessor.title2Code("feed_name","One_Two"));
+        Assert.assertEquals("feed_name-one_two", FeedPostMongoProcessor.title2Code("_feed_name_", "_One Two_"));
+        Assert.assertEquals("feed_name-one_two", FeedPostMongoProcessor.title2Code("-feed-name-", "-One Two_"));
+        Assert.assertEquals("feed_name-one_two", FeedPostMongoProcessor.title2Code("feed ___ name", "One  ___ Two"));
     }
 
     protected SyndEntry getPost() {

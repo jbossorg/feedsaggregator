@@ -46,19 +46,19 @@ public class FeedPostMongoProcessor implements ItemProcessor {
             document.append("group", group);
         }
 
-        String link = normalizeString(post.getLink());
+        String link = StringUtils.trimToEmpty(post.getLink());
         if (StringUtils.isBlank(link)) {
             throw new SkipItemException("Link is empty");
         }
         document.append("url", link);
 
-        String title = normalizeString(post.getTitle());
+        String title = StringUtils.trimToEmpty(post.getTitle());
         if (StringUtils.isBlank(title)) {
             throw new SkipItemException("Title is empty.", link);
         }
         document.append("title", title);
 
-        document.append("code", title2Code(title));
+        document.append("code", title2Code(feed, title));
 
         String author = StringUtils.trimToNull(post.getAuthor());
         if (author == null && defaultAuthor != null) {
@@ -104,17 +104,15 @@ public class FeedPostMongoProcessor implements ItemProcessor {
         return document;
     }
 
-    public static String normalizeString(String input) {
-        String output = StringUtils.trimToEmpty(input);
-        return output;
-    }
-
-    public static String title2Code(String title) {
+    public static String title2Code(String feed, String title) {
         if (title == null) {
             return null;
         }
+        return normalizeTitle(feed) + "-" + normalizeTitle(title);
+    }
 
-        char[] titleWithUnderscores = title.toLowerCase().replaceAll("[^a-z0-9_]", "_").toCharArray();
+    public static String normalizeTitle(String string) {
+        char[] titleWithUnderscores = string.toLowerCase().replaceAll("[^a-z0-9_]", "_").toCharArray();
 
         StringBuffer newTitle = new StringBuffer();
 

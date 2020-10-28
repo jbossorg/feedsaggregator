@@ -10,7 +10,9 @@ import javax.batch.runtime.context.JobContext;
 import javax.inject.Inject;
 
 import org.bson.Document;
+import org.jboss.feedsagg.common.LoggingSkipListener;
 import org.jboss.feedsagg.common.RetryItemException;
+import org.jboss.feedsagg.common.SkipItemException;
 import org.jboss.logging.Logger;
 
 import com.mongodb.MongoException;
@@ -87,6 +89,16 @@ public class FeedPostMongoWriter implements ItemWriter {
             try {
                 collection.findOneAndReplace(Filters.eq("url", postUrl), doc, replaceOptions);
             } catch (MongoException e) {
+                // Skip duplicities. Exception like:
+                // Command failed with error 11000 (DuplicateKey): 'E11000 duplicate key error collection:
+                // test-db.test-collection index: _code_ dup key: { : "test_title_1" }'
+                if (e.getCode() == 11000) {
+                    // Do not throw SkipItemException because it stop whole batch !!!
+                    // Just continue to next item.
+                    LoggingSkipListener.logMessage(new SkipItemException("blog post with code already exists.", e, postUrl));
+                    continue;
+                }
+
                 throw new RetryItemException("Cannot store blogpost", e, postUrl);
             }
 

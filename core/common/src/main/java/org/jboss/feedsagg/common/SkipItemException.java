@@ -19,6 +19,10 @@ public class SkipItemException extends Exception {
         super(message, cause);
     }
 
+    public SkipItemException(String message, Throwable cause, Object postUrl) {
+        this(message + " post_url=" + postUrl, cause);
+    }
+
     public SkipItemException(Throwable cause) {
         super(cause);
     }

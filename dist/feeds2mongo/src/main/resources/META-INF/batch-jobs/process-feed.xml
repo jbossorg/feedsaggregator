@@ -22,7 +22,7 @@
             <listener ref="loggingSkipListener" />
             <listener ref="loggingRetryListener" />
         </listeners>
-        <chunk retry-limit="3">
+        <chunk item-count="10" retry-limit="3">
             <reader ref="feedReader"/>
             <processor ref="feedPostProcessor"/>
             <writer ref="feedMongoWriter"/>
@@ -35,6 +35,11 @@
 
                 <include class="org.jboss.feedsagg.common.RetryItemException"/>
             </retryable-exception-classes>
+            <!-- Rollback mechanism open again reader and writer which is not ideal in this case -->
+            <no-rollback-exception-classes>
+                <include class="org.jboss.feedsagg.common.SkipItemException"/>
+                <include class="org.jboss.feedsagg.common.RetryItemException"/>
+            </no-rollback-exception-classes>
         </chunk>
     </step>
 </job>

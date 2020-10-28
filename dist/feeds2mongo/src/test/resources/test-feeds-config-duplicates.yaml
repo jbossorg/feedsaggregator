@@ -1,0 +1,11 @@
+# test configuration file
+- test-group:
+  - code: test1
+    author: 'Author 1 from config'
+    url: /test-feed.xml
+  - code: test2
+    author: 'Author from config'
+    url: /test-feed2.xml
+  - code: test-duplicates
+    author: 'Author from config'
+    url: /test-feed-duplicates.xml
