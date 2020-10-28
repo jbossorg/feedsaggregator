@@ -13,7 +13,7 @@
     <description>Feeds Aggregator Distribution with Mongo DB backend</description>
 
     <properties>
-        <version.mongo.flapdoodle>2.2.0</version.mongo.flapdoodle>
+        <version.mongo.flapdoodle>3.0.0</version.mongo.flapdoodle>
         <version.mongodb.driver>3.12.7</version.mongodb.driver>
 
         <main.class>org.jberet.se.Main</main.class>

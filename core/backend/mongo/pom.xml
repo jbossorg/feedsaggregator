@@ -13,7 +13,7 @@
 
     <properties>
         <version.mongodb.driver>3.12.7</version.mongodb.driver>
-        <version.mongo.flapdoodle>2.2.0</version.mongo.flapdoodle>
+        <version.mongo.flapdoodle>3.0.0</version.mongo.flapdoodle>
     </properties>
 
     <dependencies>
