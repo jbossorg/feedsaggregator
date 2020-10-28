@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+    <channel>
+        <title>test-feed</title>
+        <link>https://example.com</link>
+        <description>feed test description</description>
+        
+        <item>
+            <title>Test Title 1</title>
+            <link>
+                https://example.com/blogduplicate/post1/
+            </link>
+            <author>Author</author>
+            <description>
+                blog post description
+            </description>
+            <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+            <category>tag1</category>
+        </item>
+
+        <item>
+            <title>Test Title 1</title>
+            <link>
+                https://example.com/blogduplicate/post1-duplicate/
+            </link>
+            <author>Author</author>
+            <description>
+                blog post description - duplicate
+            </description>
+            <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+            <category>tag1</category>
+        </item>
+
+        <item>
+            <!-- Don't change title. It's used to test duplicities with test-feed2.xml -->
+            <title>Test Title 2</title>
+            <link>
+                https://example.com/blogduplicate/post2/
+            </link>
+            <author>Author</author>
+            <description>
+                blog post description 2
+            </description>
+            <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+            <category>tag2</category>
+        </item>
+
+
+    </channel>
+</rss>

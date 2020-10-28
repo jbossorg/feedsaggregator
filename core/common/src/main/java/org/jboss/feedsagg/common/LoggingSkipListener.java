@@ -1,24 +1,22 @@
 package org.jboss.feedsagg.common;
 
-import java.util.List;
-
 import javax.batch.api.chunk.listener.SkipProcessListener;
 import javax.batch.api.chunk.listener.SkipReadListener;
-import javax.batch.api.chunk.listener.SkipWriteListener;
 
 import org.jboss.logging.Logger;
 
 /**
- * Logs warning if item has been skipped.
+ * Logs warning if item has been skipped. Intentionally it doesn't implement SkipWriterListener because it skip whole
+ * batch not only one item.
  * 
  * @see SkipItemException
  */
-public class LoggingSkipListener implements SkipReadListener, SkipProcessListener, SkipWriteListener {
+public class LoggingSkipListener implements SkipReadListener, SkipProcessListener {
 
     protected static final Logger log = Logger.getLogger(LoggingSkipListener.class);
 
-    protected void logMessage(Exception ex) {
-        log.warnf("POST_PROCESS status=SKIP reason=%s", ex.getMessage());
+    public static void logMessage(Exception ex) {
+        log.warnf("POST_PROCESS status=SKIP reason=%s cause=%s", ex.getMessage(), ex.getCause());
     }
 
     @Override
@@ -31,8 +29,4 @@ public class LoggingSkipListener implements SkipReadListener, SkipProcessListene
         logMessage(ex);
     }
 
-    @Override
-    public void onSkipWriteItem(List<Object> items, Exception ex) throws Exception {
-        logMessage(ex);
-    }
 }

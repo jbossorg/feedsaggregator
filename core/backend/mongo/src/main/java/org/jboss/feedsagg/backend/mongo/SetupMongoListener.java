@@ -90,9 +90,7 @@ public class SetupMongoListener implements JobListener {
         }
         if (createCodeIndex) {
             log.infof("Creating index %s", INDEX_CODE);
-            // code index is not unique because different posts from different feeds can have same code. Only URL is
-            // unique
-            collection.createIndex(Indexes.ascending("code"), new IndexOptions().name(INDEX_CODE).unique(false));
+            collection.createIndex(Indexes.ascending("code"), new IndexOptions().name(INDEX_CODE).unique(true));
         }
         if (createPublishedIndex) {
             log.infof("Creating index %s", INDEX_PUBLISHED);
