@@ -19,7 +19,7 @@ class PostResourceTest {
     @Test
     void testGetPost() {
         BlogPost post = given().when().get("/rest/v1/post/my_test_code").then().statusCode(200).extract().as(BlogPost.class);
-        MongoTestResource.verifyResponseBlogPost("my_test_code", post);
+        MongoTestResource.verifyResponseBlogPost("my_test_code", post, true);
     }
 
     @Test

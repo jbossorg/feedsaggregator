@@ -109,36 +109,40 @@ public class MongoTestResource implements QuarkusTestResourceLifecycleManager {
             throw new RuntimeException("Failed to load data for import");
         }
         collection.insertMany(new ArrayList<>(importedDocuments.values()));
-        log.infof("Imported "+importedDocuments.size()+" documents.");
+        log.infof("Imported " + importedDocuments.size() + " documents.");
     }
-    
+
     /**
      * Verifies REST API response blogpost POJO against document loaded into mongodb
      * 
      * @param code of the blogpost
      * @param response blogpost object
+     * @param contentPresent if true content is verified for match, if false content in response have to be null
      */
-    public static void verifyResponseBlogPost(String code, BlogPost response) {
-        
+    public static void verifyResponseBlogPost(String code, BlogPost response, boolean contentPresent) {
+
         Document mongoDoc = MongoTestResource.getImportedDocuments().get(code);
         Assertions.assertNotNull(mongoDoc, "Document not found to be imported into Mongo for code " + code);
-        
+
         // id is not published over the API!
         Assertions.assertNull(response.getId());
         Assertions.assertEquals(code, response.getCode());
-        //next code also verifies that translation from mongo document to the REST API alue object works correctly!
+        // next code also verifies that translation from mongo document to the REST API alue object works correctly!
         Assertions.assertEquals(mongoDoc.getString("title"), response.getTitle());
         Assertions.assertEquals(mongoDoc.getString("url"), response.getUrl());
         Assertions.assertEquals(mongoDoc.getString("feed"), response.getFeed());
         Assertions.assertEquals(mongoDoc.getString("group"), response.getGroup());
         Assertions.assertEquals(mongoDoc.getString("author"), response.getAuthor());
-        Assertions.assertEquals(mongoDoc.getString("content"), response.getContent());
+        if (contentPresent) {
+            Assertions.assertEquals(mongoDoc.getString("content"), response.getContent());
+        } else {
+            Assertions.assertNull(response.getContent());
+        }
         Assertions.assertEquals(mongoDoc.getString("contentPreview"), response.getContentPreview());
         Assertions.assertEquals(mongoDoc.getDate("published"), response.getPublished());
         Assertions.assertEquals(mongoDoc.getDate("updated"), response.getUpdated());
         Assertions.assertEquals(mongoDoc.getList("tags", String.class), response.getTags());
     }
-
 
     @Override
     public void stop() {
