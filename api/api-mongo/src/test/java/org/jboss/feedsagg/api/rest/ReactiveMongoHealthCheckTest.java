@@ -11,7 +11,7 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 
 /**
- * Test of {@link PostResource}
+ * Test of {@link io.quarkus.mongodb.health.MongoHealthCheck}
  */
 @QuarkusTest
 @QuarkusTestResource(MongoTestResource.class)
