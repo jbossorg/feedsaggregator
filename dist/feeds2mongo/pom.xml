@@ -14,7 +14,7 @@
 
     <properties>
         <version.mongo.flapdoodle>2.2.0</version.mongo.flapdoodle>
-        <version.mongodb.driver>3.12.7</version.mongodb.driver>
+        <version.mongodb.driver>3.12.9</version.mongodb.driver>
 
         <main.class>org.jberet.se.Main</main.class>
 
