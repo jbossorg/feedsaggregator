@@ -12,7 +12,7 @@
     <description>Mongo backend</description>
 
     <properties>
-        <version.mongodb.driver>3.12.7</version.mongodb.driver>
+        <version.mongodb.driver>3.12.11</version.mongodb.driver>
         <version.mongo.flapdoodle>2.2.0</version.mongo.flapdoodle>
     </properties>
 
